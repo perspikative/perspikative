@@ -282,6 +282,12 @@ permalink: /profile
     font-style: italic;
   }
 
+  /* Pas de username choisi : une fois chargé, on masque complètement la
+     ligne (pas de skeleton "vide" laissé affiché, pas de texte "@"). */
+  #profileUsername.is-empty.is-loaded {
+    display: none;
+  }
+
   /* ===== SKELETONS DE CHARGEMENT =====
      Le contenu réel reste dans le flux normal (aucun layout shift) ; le
      skeleton est positionné par-dessus en absolu, exactement à la même
@@ -289,6 +295,7 @@ permalink: /profile
      (voir .is-loaded plus bas + profile.js). Couvre : displayName,
      profileBio, accountEmail, accountId (texte) et profilePic (photo). */
   #displayName,
+  #profileUsername,
   #profileBio,
   #accountEmail,
   #accountId {
@@ -296,6 +303,7 @@ permalink: /profile
   }
 
   #displayName .skeleton-bar,
+  #profileUsername .skeleton-bar,
   #profileBio .skeleton-bar,
   #accountEmail .skeleton-bar,
   #accountId .skeleton-bar {
@@ -308,11 +316,19 @@ permalink: /profile
   }
 
   #displayName .skeleton-bar {
-    top: 0.14em;
+    top: 0.04em;
     left: 0;
     height: 1.1em;
     width: 62%;
     max-width: 220px;
+    border-radius: 25px;
+  }
+
+  #profileUsername .skeleton-bar {
+    top: 0.7em;
+    left: 0.2em;
+    height: 1em;
+    width: 120px;
     border-radius: 25px;
   }
 
@@ -341,6 +357,7 @@ permalink: /profile
   }
 
   #displayName .skeleton-bar::before,
+  #profileUsername .skeleton-bar::before,
   #profileBio .skeleton-bar::before,
   #accountEmail .skeleton-bar::before,
   #accountId .skeleton-bar::before {
@@ -351,6 +368,7 @@ permalink: /profile
   }
 
   #displayName .skeleton-bar::after,
+  #profileUsername .skeleton-bar::after,
   #profileBio .skeleton-bar::after,
   #accountEmail .skeleton-bar::after,
   #accountId .skeleton-bar::after {
@@ -368,6 +386,7 @@ permalink: /profile
   }
 
   #displayName > span.real-text,
+  #profileUsername > span.real-text,
   #profileBio > span.real-text,
   #accountEmail > span.real-text,
   #accountId > span.real-text {
@@ -377,6 +396,7 @@ permalink: /profile
   }
 
   #displayName.is-loaded .skeleton-bar,
+  #profileUsername.is-loaded .skeleton-bar,
   #profileBio.is-loaded .skeleton-bar,
   #accountEmail.is-loaded .skeleton-bar,
   #accountId.is-loaded .skeleton-bar {
@@ -385,6 +405,7 @@ permalink: /profile
   }
 
   #displayName.is-loaded > span.real-text,
+  #profileUsername.is-loaded > span.real-text,
   #profileBio.is-loaded > span.real-text,
   #accountEmail.is-loaded > span.real-text,
   #accountId.is-loaded > span.real-text {
@@ -447,6 +468,7 @@ permalink: /profile
 
   @media (prefers-reduced-motion: reduce) {
     #displayName .skeleton-bar::after,
+    #profileUsername .skeleton-bar::after,
     #profileBio .skeleton-bar::after,
     #accountEmail .skeleton-bar::after,
     #accountId .skeleton-bar::after,
@@ -1617,7 +1639,7 @@ permalink: /profile
 
         <div class="profile-identity">
           <div id="displayName"><span class="skeleton-bar" aria-hidden="true"></span><span class="real-text">Utilisateur</span></div>
-          <div id="profileUsername" hidden></div>
+          <div id="profileUsername"><span class="skeleton-bar" aria-hidden="true"></span><span class="real-text"></span></div>
         </div>
 
         <div class="profile-bio-block">
@@ -1841,8 +1863,8 @@ permalink: /profile
     <img src="/icons/rechercher.svg" alt="Rechercher">
   </a>
   
-  <script type="module" src="/js/firebase.js"></script>
-  <script type="module" src="/js/profile.js"></script>
+  <script type="module" src="/jss/firebase.js"></script>
+  <script type="module" src="/jss/profile.js"></script>
 
   <script>
     const menuToggle = document.getElementById('menuToggle');
