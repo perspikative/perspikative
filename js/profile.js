@@ -33,7 +33,7 @@ const RESERVED_USERNAMES = new Set([
     "404", "tartineske", "mentions-legales",
     "politique-de-confidentialite", "terms-of-service", "position-ia",
     "brand-guidelines", "art-challenge", "www", "assets", "static",
-    "settings", "notifications", "explore", "home", "index"
+    "settings", "explore", "home", "index"
 ]);
 
 const USERNAME_REGEX = /^[a-z0-9_]{3,20}$/;
@@ -293,12 +293,13 @@ function renderBio(bio) {
 function renderUsername(usernameDisplay) {
     if (!profileUsername) return;
     if (usernameDisplay) {
-        profileUsername.textContent = `@${usernameDisplay}`;
-        profileUsername.hidden = false;
+        setRealText(profileUsername, `@${usernameDisplay}`);
+        profileUsername.classList.remove("is-empty");
     } else {
-        profileUsername.textContent = "";
-        profileUsername.hidden = true;
+        setRealText(profileUsername, "");
+        profileUsername.classList.add("is-empty");
     }
+    markLoaded(profileUsername);
 }
 
 function renderPublicUrl(usernameDisplay) {
