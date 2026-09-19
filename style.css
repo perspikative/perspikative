@@ -2660,7 +2660,7 @@ footer p {
 
 footer a.footer-link {
   position: relative;
-  font-family: "Rubik", Arial, sans-serif; /* Même police que les paragraphes */
+  font-family: "Rubik", Arial, sans-serif;
   font-weight: 510;
   color: #b4fdd4;
   text-decoration: none;
@@ -2735,8 +2735,8 @@ footer.is-visible p:nth-of-type(2) { transition-delay: 0.5s; }
 footer.is-visible p:nth-of-type(3) { transition-delay: 0.7s; } 
 footer.is-visible p:nth-of-type(4) { transition-delay: 0.9s; } 
 footer.is-visible p:nth-of-type(5) { transition-delay: 1.1s; }
-footer.is-visible p:nth-of-type(5) { transition-delay: 1.3s; } 
-footer.is-visible p:nth-of-type(5) { transition-delay: 1.5s; } 
+footer.is-visible p:nth-of-type(6) { transition-delay: 1.3s; } 
+footer.is-visible p:nth-of-type(7) { transition-delay: 1.5s; } 
 
 
 
@@ -6477,6 +6477,16 @@ body {
     transition: opacity 0.15s linear, visibility 0.15s linear, border-radius 0.15s linear;
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
