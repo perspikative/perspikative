@@ -21,6 +21,7 @@ permalink: /portfolio/projets
   <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: light)">
 
   <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/portfolio/portfolio.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
 
@@ -184,7 +185,6 @@ permalink: /portfolio/projets
       </div>
     </section>
 
-    <!-- Affiché quand aucun dessin ne correspond à la combinaison de couleurs sélectionnée -->
     <div class="filter-empty-state" id="filter-empty-state" hidden>
       <img src="/icons/rechercher.svg" alt="" class="filter-empty-icon">
       <p>Aucun résultat pour cette combinaison de couleurs</p>
@@ -197,7 +197,6 @@ permalink: /portfolio/projets
         </button>
       </div>
 
-      <!-- Pastilles générées dynamiquement depuis les data-colors de chaque dessin -->
       <div class="filter-swatches" id="filter-swatches"></div>
     </div>
   </main>
@@ -325,6 +324,25 @@ permalink: /portfolio/projets
       <img src="/icons/arrow-right-lightbox.svg" alt="Suivant">
     </button>
   </div>
+
+  <!-- ═══ MINI LIGHTBOX : INVITATION À SE CONNECTER (like sans session) ═══ -->
+  <div class="login-prompt-overlay" id="login-prompt-overlay">
+    <div class="login-prompt-window">
+      <button class="login-prompt-close" id="login-prompt-close" aria-label="Fermer">
+        <img src="/icons/fermer.svg" alt="Fermer">
+      </button>
+
+      <span class="login-prompt-icon">
+        <img src="/icons/like.svg" alt="">
+      </span>
+
+      <h3 class="login-prompt-title">Connecte-toi pour liker</h3>
+      <p class="login-prompt-subtitle">Crée toi un compte ou connecte-toi pour garder tes œuvres préférées !</p>
+
+      <a href="/login" class="login-prompt-btn">Se connecter</a>
+    </div>
+  </div>
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <!-- ═══ MINI LIGHTBOX : SIGNALEMENT D'UN COMMENTAIRE ═══ -->
   <div class="report-overlay" id="report-overlay">
