@@ -37,7 +37,8 @@ permalink: /@
 
   .pp-page {
     padding: 50px 140px 60px 140px;
-    max-width: 760px;
+    width: 100%;
+    max-width: 680px;
     margin: 0 auto;
     min-height: 60vh;
   }
@@ -58,14 +59,17 @@ permalink: /@
 
   .pp-loading[hidden] { display: none; }
 
-  /* réutilise le spinner de style.css */
-
   /* ===== Carte profil public ===== */
   .pp-card {
     position: relative;
+    width: 100%;
+    max-width: 520px;
+    min-width: min(340px, 100%);
+    min-height: 360px;
+    margin: 0 auto;
     background: rgba(255, 255, 255, 0.06);
     border-radius: 44px;
-    padding: 44px 40px 40px 40px;
+    padding: 40px 36px 36px 36px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,8 +85,8 @@ permalink: /@
 
   .pp-pic-wrapper {
     position: relative;
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
     flex-shrink: 0;
   }
 
@@ -98,8 +102,8 @@ permalink: /@
   .pp-pic {
     position: relative;
     z-index: 1;
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     object-fit: cover;
     display: block;
@@ -109,19 +113,26 @@ permalink: /@
   .pp-name {
     font-family: 'Rubik', sans-serif;
     font-weight: 700;
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: #ffffff;
+    line-height: 1;
+    width: 100%;
+    max-width: 100%;
     margin: 8px 0 -2px 0;
     letter-spacing: -0.02em;
     word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .pp-username {
     font-family: 'Rubik', sans-serif;
     font-weight: 500;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.55);
+    width: 100%;
+    max-width: 100%;
     margin: 0 0 22px;
+    overflow-wrap: anywhere;
   }
 
   .pp-bio {
@@ -130,10 +141,14 @@ permalink: /@
     font-size: 1.05rem;
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.85);
-    max-width: 480px;
+    width: 100%;
+    max-width: 100%;
     margin: 0 0 26px;
     white-space: pre-line;
     word-break: break-word;
+    overflow-wrap: anywhere;
+    position: relative;
+    min-height: 2.8em;
   }
 
   .pp-bio.is-empty {
@@ -154,13 +169,9 @@ permalink: /@
   }
 
   .pp-since::before {
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #00c896;
-    box-shadow: 0 0 8px #00c896;
-    flex-shrink: 0;
+    content: '✦';
+    font-size: 1rem;
+    color: #ffffff;
   }
 
   .pp-since span {
@@ -173,10 +184,245 @@ permalink: /@
 
   @media (max-width: 520px) {
     .pp-card {
-      padding: 36px 24px 32px 24px;
-      border-radius: 36px;
+      padding: 36px 24px 24px 24px;
+      border-radius: 46px;
     }
-    .pp-name { font-size: 1.7rem; }
+    .pp-name { font-size: 1.8rem; }
+  }
+
+  /* ===== SKELETONS DE CHARGEMENT (comme profile.html) ===== */
+  #ppName,
+  #ppUsername {
+    position: relative;
+  }
+
+  #ppName .skeleton-bar,
+  #ppUsername .skeleton-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: block;
+    overflow: hidden;
+    opacity: 1;
+    border-radius: 25px;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #ppName .skeleton-bar {
+    top: 0.04em;
+    height: 1em;
+    width: 62%;
+    max-width: 85%;
+  }
+
+  #ppUsername .skeleton-bar {
+    top: 0.4em;
+    height: 1em;
+    width: 170px;
+    max-width: 65%;
+  }
+
+  #ppName .skeleton-bar::before,
+  #ppUsername .skeleton-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--skeleton-base);
+  }
+
+  #ppName .skeleton-bar::after,
+  #ppUsername .skeleton-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      var(--skeleton-shine) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: skeleton-shimmer 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  #ppName > span.real-text,
+  #ppUsername > span.real-text {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #ppName.is-loaded .skeleton-bar,
+  #ppUsername.is-loaded .skeleton-bar {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #ppName.is-loaded > span.real-text,
+  #ppUsername.is-loaded > span.real-text {
+    opacity: 1;
+  }
+
+  /* Photo : masque circulaire superposé à l'image */
+  .skeleton-avatar {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+  }
+
+  .skeleton-avatar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--skeleton-base);
+  }
+
+  .skeleton-avatar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      var(--skeleton-shine) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: skeleton-shimmer 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  #ppPic {
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #ppPic.is-loaded {
+    opacity: 1;
+  }
+
+  .pp-pic-wrapper.is-loaded .skeleton-avatar {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @keyframes skeleton-shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #ppName .skeleton-bar::after,
+    #ppUsername .skeleton-bar::after,
+    .skeleton-avatar::after {
+      animation: none;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --skeleton-base: rgba(0, 0, 0, 0.09);
+      --skeleton-shine: rgba(0, 0, 0, 0.16);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --skeleton-base: rgba(255, 255, 255, 0.09);
+      --skeleton-shine: rgba(255, 255, 255, 0.22);
+    }
+  }
+
+  /* Bio : deux barres qui réservent la place du texte */
+  #ppBio .skeleton-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 0.15em;
+    display: block;
+    overflow: hidden;
+    height: 1em;
+    width: 90%;
+    max-width: 380px;
+    border-radius: 25px;
+    opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #ppBio .skeleton-bar--2 {
+    top: 1.4em;
+    width: 60%;
+    max-width: 260px;
+  }
+
+  #ppBio .skeleton-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--skeleton-base);
+  }
+
+  #ppBio .skeleton-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      var(--skeleton-shine) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: skeleton-shimmer 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  #ppBio.is-loaded .skeleton-bar {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #ppBio .skeleton-bar::after { animation: none; }
+  }
+
+  /* ===== Apparition en fondu quand les infos ont chargé ===== */
+  .pp-since:not(.is-loaded) {
+    opacity: 0;
+  }
+
+  .pp-revealed {
+    animation: ppFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  /* Nom et username : simple fondu, sans mouvement */
+  .pp-revealed-fade {
+    animation: ppFadeOnly 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  /* "Perspikativeur depuis" : même montée que la bio, mais en décalé */
+  .pp-since.pp-revealed {
+    animation-delay: 0.25s;
+  }
+
+  @keyframes ppFadeOnly {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes ppFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pp-revealed { animation: none; }
+    .pp-revealed-fade { animation: none; }
   }
 
   /* ===== État privé / 404 ===== */
@@ -303,18 +549,24 @@ permalink: /@
   <div class="pp-page">
 
     <!-- Chargement -->
-    <div class="pp-loading" id="ppLoading">
+    <div class="pp-loading" id="ppLoading" hidden>
       <div class="lb-spinner"></div>
     </div>
 
     <!-- Profil public trouvé -->
-    <div class="pp-card" id="ppCard" hidden>
+    <div class="pp-card" id="ppCard">
       <div class="pp-pic-wrapper">
-        <img id="ppPic" class="pp-pic" src="" alt="Photo de profil">
+        <span class="skeleton-bar skeleton-avatar" aria-hidden="true"></span>
+        <img
+          id="ppPic"
+          class="pp-pic"
+          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='130' height='130' viewBox='0 0 90 90'><rect width='100%25' height='100%25' fill='%230d1f1c'/></svg>"
+          alt="Photo de profil"
+        >
       </div>
-      <h1 class="pp-name" id="ppName">—</h1>
-      <p class="pp-username" id="ppUsername">@—</p>
-      <p class="pp-bio" id="ppBio"></p>
+      <h1 class="pp-name" id="ppName"><span class="skeleton-bar" aria-hidden="true"></span><span class="real-text">—</span></h1>
+      <p class="pp-username" id="ppUsername"><span class="skeleton-bar" aria-hidden="true"></span><span class="real-text">@—</span></p>
+      <p class="pp-bio" id="ppBio"><span class="skeleton-bar" aria-hidden="true"></span><span class="skeleton-bar skeleton-bar--2" aria-hidden="true"></span></p>
       <div class="pp-since">
         <span id="ppSince">Perspikativeur depuis…</span>
       </div>
@@ -370,6 +622,29 @@ permalink: /@
     const menuToggle = document.getElementById('menuToggle');
     menuToggle.addEventListener('change', (e) => {
       document.body.classList.toggle('menu-open', e.target.checked);
+    });
+  </script>
+
+  <script>
+    // Retire le skeleton de la photo dès que la vraie image est chargée
+    const ppPic = document.getElementById('ppPic');
+    ppPic.addEventListener('load', () => {
+      if (ppPic.src.startsWith('data:')) return;
+      ppPic.classList.add('is-loaded');
+      ppPic.parentElement.classList.add('is-loaded');
+    });
+
+    // Fade-in de chaque élément dès que le JS lui injecte son contenu
+    ['ppName', 'ppUsername', 'ppBio', 'ppSince'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const target = id === 'ppSince' ? el.parentElement : el;
+      const revealClass = (id === 'ppName' || id === 'ppUsername') ? 'pp-revealed-fade' : 'pp-revealed';
+      new MutationObserver((_, obs) => {
+        el.classList.add('is-loaded');
+        target.classList.add('is-loaded', revealClass);
+        obs.disconnect();
+      }).observe(el, { childList: true, characterData: true, subtree: true });
     });
   </script>
 

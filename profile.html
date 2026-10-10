@@ -221,7 +221,7 @@ permalink: /profile
 
   /* Nom + bio */
   .profile-identity {
-    margin-top: 10px;
+    margin-top: 8px;
     min-width: 0;
   }
 
@@ -746,6 +746,10 @@ permalink: /profile
     max-width: 440px;
   }
 
+  .liked-drawings-section-title {
+    margin-top: 36px;
+  }
+
   .account-field-value {
     display: flex;
     align-items: center;
@@ -967,6 +971,213 @@ permalink: /profile
   }
 
 
+  /* ============================= ONGLET PROFIL (LIKES) ============================= */
+
+  .liked-drawings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  @media (min-width: 640px) {
+    .liked-drawings-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (min-width: 900px) {
+    .liked-drawings-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (min-width: 1200px) {
+    .liked-drawings-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  .liked-drawing-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    overflow: hidden;
+    background: none;
+    border: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .liked-drawing-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      var(--skeleton-shine) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: skeleton-shimmer 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  /* La carte "Voir plus" n'a pas d'image à charger : pas de shimmer. */
+  .liked-drawing-more::after {
+    display: none;
+  }
+
+  .liked-drawing-card.is-loaded::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .liked-drawing-card::after {
+      animation: none;
+    }
+  }
+
+  .liked-drawing-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .liked-drawing-card.is-loaded {
+    animation: liked-card-reveal 0.25s ease both;
+  }
+
+  @keyframes liked-card-reveal {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .liked-drawing-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .liked-drawing-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14%;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  .liked-drawing-more-inner {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.12);
+    cursor: pointer;
+    box-shadow:
+      inset 0 0 14px rgba(255, 255, 255, 0.16),
+      0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+
+  .liked-drawing-more-inner img {
+    width: 30px;
+    height: 30px;
+    opacity: 0.8;
+  }
+
+  .liked-drawing-more-inner span {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+  }
+
+  .liked-drawings-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
+    padding: 60px 20px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .liked-drawings-empty-icon {
+    width: 40px;
+    height: 40px;
+    opacity: 0.4;
+    margin-bottom: 6px;
+  }
+
+  .liked-drawings-empty h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .liked-drawings-empty p {
+    font-family: 'Rubik', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 300;
+    max-width: 300px;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  /* Cases "squelette" affichées pendant le chargement (remplacent
+     l'ancien spinner rond) : même forme que les vraies cartes, avec
+     l'effet shimmer déjà utilisé pour displayName/profileBio/etc. plus
+     haut, réutilisé ici sur un bloc plein plutôt qu'une barre de texte. */
+  .liked-drawing-skeleton {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--skeleton-base);
+  }
+
+  .liked-drawing-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      var(--skeleton-shine) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: skeleton-shimmer 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  /* Masquée sous 900px : 4 cases forment un carré 2×2 propre sur mobile
+     (2 colonnes) plutôt qu'une ligne de 5 qui déborderait en "4 + 1". */
+  @media (max-width: 899px) {
+    .liked-drawing-skeleton-fifth {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .liked-drawing-skeleton::after {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .liked-drawings-grid {
+      gap: 10px;
+    }
+  }
+
   @media (max-width: 900px) {
     .public-url-card {
       flex-direction: column;
@@ -985,6 +1196,15 @@ permalink: /profile
       box-shadow:
         inset 0 0 14px rgba(255, 255, 255, 0.14),
         0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+    
+    .liked-drawing-more-inner img {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .liked-drawing-more-inner span {
+      font-size: 0.94rem;
     }
 
     .btn-view-public {
@@ -1662,19 +1882,22 @@ permalink: /profile
       <!-- ===== COLONNE DROITE : ONGLETS ===== -->
       <div class="profile-panel">
         <div class="profile-tabs" role="tablist">
-          <button class="profile-tab-btn active" data-tab="compte" role="tab" aria-selected="true">
+          <button class="profile-tab-btn active" data-tab="profile" role="tab" aria-selected="true">
+            Profil
+          </button>
+          <button class="profile-tab-btn" data-tab="account" role="tab" aria-selected="false">
             Compte
           </button>
-          <button class="profile-tab-btn" data-tab="confidentialite" role="tab" aria-selected="false">
+          <button class="profile-tab-btn" data-tab="privacy" role="tab" aria-selected="false">
             Confidentialité
           </button>
-          <button class="profile-tab-btn" data-tab="securite" role="tab" aria-selected="false">
+          <button class="profile-tab-btn" data-tab="security" role="tab" aria-selected="false">
             Sécurité
           </button>
         </div>
 
         <div class="profile-tab-panels">
-          <div class="profile-tab-content active" data-tab-panel="compte">
+          <div class="profile-tab-content" data-tab-panel="account">
             <div class="account-fields">
 
               <div>
@@ -1709,7 +1932,7 @@ permalink: /profile
             </div>
           </div>
 
-          <div class="profile-tab-content" data-tab-panel="confidentialite">
+          <div class="profile-tab-content" data-tab-panel="privacy">
 
             <div class="public-url-card">
               <div class="public-url-info">
@@ -1751,11 +1974,31 @@ permalink: /profile
 
           </div>
 
-          <div class="profile-tab-content" data-tab-panel="securite">
+          <div class="profile-tab-content" data-tab-panel="security">
             <div class="tab-placeholder">
               <h3>Section Sécurité</h3>
               <p>Bientôt : gestion des connexions actives et des options de sécurité du compte.</p>
             </div>
+          </div>
+
+          <div class="profile-tab-content active" data-tab-panel="profile">
+            <span class="account-field-label">Œuvres likées</span>
+
+            <div class="liked-drawings-grid" id="likedDrawingsGrid">
+              <div class="liked-drawing-skeleton" aria-hidden="true"></div>
+              <div class="liked-drawing-skeleton" aria-hidden="true"></div>
+              <div class="liked-drawing-skeleton" aria-hidden="true"></div>
+              <div class="liked-drawing-skeleton" aria-hidden="true"></div>
+              <div class="liked-drawing-skeleton liked-drawing-skeleton-fifth" aria-hidden="true"></div>
+            </div>
+
+            <div class="liked-drawings-empty" id="likedDrawingsEmpty" style="display:none">
+              <img src="/icons/heart.svg" alt="" class="liked-drawings-empty-icon">
+              <h3>Pas encore de coups de cœur ?</h3>
+              <p>Tes œuvres likées apparaîtront ici.</p>
+            </div>
+
+            <span class="account-field-label liked-drawings-section-title">   </span>
           </div>
         </div>
       </div>
