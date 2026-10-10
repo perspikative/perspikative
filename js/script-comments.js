@@ -425,7 +425,6 @@
         || 'Anonyme';
       var username = (authorProfile && authorProfile.username) || null;
       var photoURL = (authorProfile && authorProfile.photoURL)
-        || user.photoURL
         || getPfpFromUid(user.uid);
 
       var colRef = fire.collection(db, 'drawings', currentDrawingId, 'comments');
@@ -742,9 +741,22 @@
       guestEl.style.display   = 'none';
       inputWrap.style.display = 'flex';
 
-      // Photo de profil de l'utilisateur connecté
+      // Photo de profil de l'utilisateur connecté : lue dans
+      // publicProfiles/{uid}/photoURL (Firestore). En attendant la réponse
+      // (ou si le champ est absent), on affiche la photo par défaut
+      // déterministe pour éviter un avatar vide.
       if (myPfpEl) {
-        myPfpEl.src = user.photoURL || getPfpFromUid(user.uid);
+        myPfpEl.src = getPfpFromUid(user.uid);
+
+        fetchAuthorProfile(user.uid).then(function (profile) {
+          // L'utilisateur a pu se déconnecter ou changer de compte entre-temps
+          var current = window.__prspkUser;
+          if (!current || current.uid !== user.uid) return;
+
+          if (profile && profile.photoURL) {
+            myPfpEl.src = profile.photoURL;
+          }
+        });
       }
 
       updateSendAvailability();
