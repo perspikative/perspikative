@@ -73,6 +73,19 @@ const visibilityForm = document.getElementById("visibilityForm");
 const visibilityStatus = document.getElementById("visibilityStatus");
 
 // -----------------------------------------------------------------------
+// Références DOM — onglet Profil (œuvres likées)
+// -----------------------------------------------------------------------
+const likedDrawingsGrid = document.getElementById("likedDrawingsGrid");
+const likedDrawingsEmpty = document.getElementById("likedDrawingsEmpty");
+
+// Toutes les œuvres likées actuellement chargées (mises à jour à chaque
+// loadLikedDrawings), pour pouvoir paginer l'affichage sans refaire
+// d'appel réseau. likedDrawingsShownCount suit combien d'entre elles sont
+// actuellement affichées dans la grille.
+let allLikedDrawings = [];
+let likedDrawingsShownCount = 0;
+
+// -----------------------------------------------------------------------
 // Références DOM — lightbox photo de profil (coverflow)
 // -----------------------------------------------------------------------
 const btnOpenAvatarLightbox = document.getElementById("btnOpenAvatarLightbox");
@@ -91,25 +104,62 @@ let currentUsernameDisplay = null; // casse d'affichage actuellement enregistré
 let usernameCheckToken = 0; // pour ignorer les réponses de vérif obsolètes
 
 // -----------------------------------------------------------------------
-// Onglets Compte / Confidentialité / Sécurité
+// Onglets Profil / Compte / Confidentialité / Sécurité
+// Persistance via l'URL (#account, #privacy, #security, #profile)
+// pour rester sur le bon onglet même après un rafraîchissement de page.
 // -----------------------------------------------------------------------
 const tabButtons = document.querySelectorAll(".profile-tab-btn");
 const tabPanels = document.querySelectorAll(".profile-tab-content");
+const validProfileTabs = Array.from(tabButtons).map((b) => b.dataset.tab);
+
+function activateProfileTab(target, options) {
+    const opts = options || {};
+    if (!validProfileTabs.includes(target)) return;
+
+    tabButtons.forEach((b) => {
+        const isTarget = b.dataset.tab === target;
+        b.classList.toggle("active", isTarget);
+        b.setAttribute("aria-selected", isTarget ? "true" : "false");
+    });
+
+    tabPanels.forEach((panel) => {
+        panel.classList.toggle("active", panel.dataset.tabPanel === target);
+    });
+
+    // L'onglet "Profil" vient de devenir visible : le nombre de colonnes
+    // de la grille n'était pas mesurable tant que le panneau était
+    // display:none, donc on recalcule maintenant qu'il l'est.
+    if (target === "profile" && typeof renderLikedDrawings === "function") {
+        renderLikedDrawings();
+    }
+
+    if (!opts.skipHashUpdate && window.location.hash.slice(1) !== target) {
+        // replaceState plutôt que d'assigner location.hash : évite d'empiler
+        // une entrée d'historique par clic d'onglet (le bouton retour du
+        // navigateur ne doit pas naviguer onglet par onglet).
+        history.replaceState(null, "", `#${target}`);
+    }
+}
 
 tabButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-        const target = btn.dataset.tab;
-
-        tabButtons.forEach((b) => {
-            b.classList.toggle("active", b === btn);
-            b.setAttribute("aria-selected", b === btn ? "true" : "false");
-        });
-
-        tabPanels.forEach((panel) => {
-            panel.classList.toggle("active", panel.dataset.tabPanel === target);
-        });
+        activateProfileTab(btn.dataset.tab);
     });
 });
+
+// Au chargement (et si l'utilisateur navigue avec les boutons
+// précédent/suivant du navigateur, ou modifie le hash manuellement) :
+// ouvre l'onglet correspondant au hash s'il est valide, sinon garde celui
+// déjà actif dans le HTML (Profil, par défaut).
+function activateProfileTabFromHash() {
+    const hash = window.location.hash.slice(1);
+    if (hash && validProfileTabs.includes(hash)) {
+        activateProfileTab(hash, { skipHashUpdate: true });
+    }
+}
+
+activateProfileTabFromHash();
+window.addEventListener("hashchange", activateProfileTabFromHash);
 
 // -----------------------------------------------------------------------
 // Utilitaires Firestore (via window.__prspkDb / window.__prspkFire,
@@ -329,6 +379,240 @@ function setVisibilityUI(isPublic) {
 }
 
 // -----------------------------------------------------------------------
+// Onglet Profil : œuvres likées (users/{uid}/likedDrawings/{id}),
+// chaque doc contenant likedAt, src, title et page (voir
+// toggleLikeInFirestore dans script.js, qui écrit ces documents depuis la
+// lightbox des œuvres). `page` est le chemin canonique exact de l'œuvre
+// (ex. /portfolio/illustrations/xxx) : on l'utilise tel quel comme lien,
+// sans reconstruire quoi que ce soit côté profil, pour rester correct
+// quelle que soit la catégorie (creations / illustrations / projets).
+//
+// Pagination "charger plus" : au premier affichage, une ligne complète de
+// la grille est montrée. Si ça déborde, le dernier emplacement de cette
+// ligne devient la carte "Voir plus" (donc colonnes - 1 œuvres + bouton).
+// Au clic, une ligne complète supplémentaire est ajoutée SOUS les cartes
+// déjà affichées (rien n'est retiré ni déplacé) ; le bouton se replace en
+// tout dernier, ou disparaît s'il n'y a plus rien à charger. Le nombre de
+// colonnes est lu directement depuis la grille rendue
+// (grid-template-columns), pour rester juste quel que soit le breakpoint
+// CSS actif.
+// -----------------------------------------------------------------------
+
+function getLikedGridColumnCount() {
+    if (!likedDrawingsGrid) return 1;
+    // Force le navigateur à appliquer les styles en attente (ex: le
+    // display:grid qu'on vient de poser) avant de lire les colonnes,
+    // sinon la valeur peut encore refléter l'état précédent.
+    void likedDrawingsGrid.offsetHeight;
+    const cols = window.getComputedStyle(likedDrawingsGrid).gridTemplateColumns;
+    if (!cols || cols === "none") return 1;
+    return cols.split(" ").filter(Boolean).length || 1;
+}
+
+function buildLikedDrawingCard(item) {
+    const card = document.createElement("a");
+    // L'animation d'entrée (liked-card-in) n'est appliquée qu'une fois
+    // l'image réellement affichable (voir plus bas), pour éviter une case
+    // vide qui termine son fade-in avant que l'image n'ait fini de charger.
+    card.className = "liked-drawing-card";
+    // Chemin canonique stocké au moment du like (fallback si un ancien
+    // like n'a pas encore ce champ, ex. avant cette mise à jour).
+    card.href = item.page || `/portfolio/creations#${item.id}`;
+
+    const img = document.createElement("img");
+    img.alt = item.title || "";
+    // Pas de lazy loading ici : ces cartes sont ajoutées explicitement au
+    // clic (l'utilisateur veut les voir tout de suite), donc on charge
+    // sans attendre qu'elles entrent dans le viewport.
+
+    const reveal = () => card.classList.add("is-loaded");
+    if (img.complete) {
+        // Déjà en cache (ex: vue juste avant dans la galerie) : pas besoin
+        // d'attendre un événement qui ne se déclenchera pas.
+        reveal();
+    } else {
+        img.addEventListener("load", reveal, { once: true });
+        img.addEventListener("error", reveal, { once: true });
+    }
+    img.src = item.src || "";
+
+    card.appendChild(img);
+
+    return card;
+}
+
+function buildLikedDrawingsMoreCard(remainingCount) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "liked-drawing-card liked-drawing-more";
+    card.setAttribute("aria-label", `Voir les ${remainingCount} autres œuvres likées`);
+
+    const inner = document.createElement("span");
+    inner.className = "liked-drawing-more-inner";
+
+    const icon = document.createElement("img");
+    icon.src = "/icons/arrow-right-lightbox.svg";
+    icon.alt = "";
+    inner.appendChild(icon);
+
+    const label = document.createElement("span");
+    label.textContent = "Voir plus";
+    inner.appendChild(label);
+
+    card.appendChild(inner);
+    card.addEventListener("click", showMoreLikedDrawings);
+
+    return card;
+}
+
+// Retire la carte "Voir plus" de la grille si elle y est (avant d'ajouter
+// de nouvelles cartes, pour ne pas la laisser coincée au milieu).
+function removeMoreCardIfAny() {
+    if (!likedDrawingsGrid) return;
+    const existing = likedDrawingsGrid.querySelector(".liked-drawing-more");
+    if (existing) existing.remove();
+}
+
+// Capacité de la toute première page (avant le premier clic sur "Voir
+// plus"), bouton compris. Sur mobile (2 colonnes), une seule ligne ne
+// donnerait qu'1 dessin + le bouton, ce qui est trop maigre visuellement :
+// on affiche alors deux lignes complètes (un "carré" 2×2 avec le bouton
+// en 4ᵉ position, donc 3 œuvres + bouton). Sur desktop (3+ colonnes), une
+// ligne suffit déjà à remplir l'espace.
+function getFirstPageCapacity(columns) {
+    return columns <= 2 ? (columns * 2) - 1 : columns - 1;
+}
+
+// Premier rendu (ou re-rendu, ex: changement de colonnes au resize) : vide
+// la grille et affiche la première page, avec le bouton "Voir plus" si le
+// total déborde.
+function renderLikedDrawings() {
+    if (!likedDrawingsGrid) return;
+
+    const items = allLikedDrawings;
+    likedDrawingsGrid.innerHTML = "";
+
+    if (!items.length) {
+        likedDrawingsGrid.style.display = "none";
+        if (likedDrawingsEmpty) likedDrawingsEmpty.style.display = "flex";
+        return;
+    }
+
+    likedDrawingsGrid.style.display = "grid";
+    if (likedDrawingsEmpty) likedDrawingsEmpty.style.display = "none";
+
+    const columns = getLikedGridColumnCount();
+    const capacity = getFirstPageCapacity(columns);
+    // Nombre total de cases disponibles sur la première page SANS bouton :
+    // une ligne sur desktop (3+ colonnes), deux lignes sur mobile (≤2).
+    const totalSlotsWithoutButton = columns <= 2 ? columns * 2 : columns;
+    const reallyOverflows = items.length > totalSlotsWithoutButton;
+
+    const visibleCount = reallyOverflows ? capacity : items.length;
+    likedDrawingsShownCount = visibleCount;
+
+    items.slice(0, visibleCount).forEach((item) => {
+        likedDrawingsGrid.appendChild(buildLikedDrawingCard(item));
+    });
+
+    if (reallyOverflows) {
+        likedDrawingsGrid.appendChild(buildLikedDrawingsMoreCard(items.length - visibleCount));
+    }
+}
+
+// Nombre d'œuvres ajoutées à chaque clic sur "Voir plus" (au-delà de la
+// toute première page, gérée séparément par getFirstPageCapacity).
+const LIKED_DRAWINGS_BATCH_SIZE = 4;
+
+// Clic sur "Voir plus" : ajoute un lot fixe d'œuvres sous les cartes déjà
+// affichées, sans rien retirer ni redisposer. Le bouton se replace en
+// tout dernier s'il reste des œuvres, sinon disparaît.
+function showMoreLikedDrawings() {
+    if (!likedDrawingsGrid) return;
+
+    const items = allLikedDrawings;
+    const remaining = items.length - likedDrawingsShownCount;
+    if (remaining <= 0) return;
+
+    removeMoreCardIfAny();
+
+    const nextBatchSize = Math.min(LIKED_DRAWINGS_BATCH_SIZE, remaining);
+
+    const nextItems = items.slice(
+        likedDrawingsShownCount,
+        likedDrawingsShownCount + nextBatchSize
+    );
+
+    nextItems.forEach((item) => {
+        likedDrawingsGrid.appendChild(buildLikedDrawingCard(item));
+    });
+
+    likedDrawingsShownCount += nextItems.length;
+
+    if (likedDrawingsShownCount < items.length) {
+        likedDrawingsGrid.appendChild(
+            buildLikedDrawingsMoreCard(items.length - likedDrawingsShownCount)
+        );
+    }
+}
+
+// La ligne complète dépend de la largeur d'écran (breakpoints CSS) : on
+// recalcule au resize pour rester juste (repart de la première page, plus
+// simple et plus sûr que d'essayer de réajuster une pagination déjà
+// entamée à un nombre de colonnes différent).
+//
+// On ne réagit qu'à un changement de LARGEUR : sur Safari iOS, faire
+// défiler la page rétracte/réaffiche la barre d'adresse, ce qui déclenche
+// un resize à chaque scroll (seule la hauteur change). Sans ce filtre, la
+// grille se réinitialisait à sa première page à chaque scroll mobile.
+let likedDrawingsLastWidth = window.innerWidth;
+window.addEventListener("resize", () => {
+    if (window.innerWidth === likedDrawingsLastWidth) return;
+    likedDrawingsLastWidth = window.innerWidth;
+    renderLikedDrawings();
+});
+
+async function loadLikedDrawings(uid) {
+    if (!likedDrawingsGrid) return;
+
+    const { db, fns } = getFire();
+    // Si Firebase n'est pas disponible (JS coupé, hors-ligne, etc.), on
+    // laisse volontairement les skeletons du HTML statique tels quels
+    // plutôt que de les remplacer par un état vide trompeur.
+    if (!db || !fns) return;
+
+    try {
+        const colRef = fns.collection(db, "users", uid, "likedDrawings");
+        const snap = await fns.getDocs(colRef);
+
+        const items = [];
+        snap.forEach((docSnap) => {
+            const data = docSnap.data() || {};
+            items.push({
+                id: docSnap.id,
+                src: data.src || "",
+                title: data.title || "",
+                page: data.page || "",
+                likedAt: data.likedAt && data.likedAt.toMillis ? data.likedAt.toMillis() : 0
+            });
+        });
+
+        // Plus récemment liké en premier. Tri côté client (pas de query()
+        // orderBy pour rester simple et ne pas dépendre d'un index composite).
+        items.sort((a, b) => b.likedAt - a.likedAt);
+
+        allLikedDrawings = items;
+        likedDrawingsShownCount = 0;
+        renderLikedDrawings();
+    } catch (err) {
+        console.error("Erreur de chargement des œuvres likées :", err);
+        allLikedDrawings = [];
+        likedDrawingsShownCount = 0;
+        renderLikedDrawings();
+    }
+}
+
+// -----------------------------------------------------------------------
 // Auth state : chargement du profil
 // -----------------------------------------------------------------------
 onAuthStateChanged(auth, async (user) => {
@@ -450,6 +734,8 @@ onAuthStateChanged(auth, async (user) => {
     renderPublicUrl(currentUsername);
     setVisibilityUI(isPublic);
     if (profileSince) profileSince.textContent = formatSince(createdAt);
+
+    loadLikedDrawings(user.uid);
 });
 
 // -----------------------------------------------------------------------

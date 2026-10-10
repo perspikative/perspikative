@@ -1,5 +1,5 @@
 // ============================= FIREBASE - PERSPIKATIVE =============================
-// Fichier unique : init app, Firestore, Auth (Google login/logout), exports globaux.
+// Fichier unique : init app, Firestore, Auth (Google login/logout + One Tap), exports globaux.
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 
@@ -26,6 +26,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
+  signInWithCredential,
   getRedirectResult,
   signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -39,6 +40,9 @@ const firebaseConfig = {
   messagingSenderId: "411164951584",
   appId: "1:411164951584:web:d340b95c22d95668c86845"
 };
+
+// ID client Web OAuth (utilisé par Google One Tap)
+const GOOGLE_CLIENT_ID = "411164951584-80iksi66b1095klelvm1jvocsjglvm09.apps.googleusercontent.com";
 
 
 // =============================
@@ -137,6 +141,54 @@ onAuthStateChanged(auth, (user) => {
     resolveAuthReady = null; // ne resolve qu'une fois, la promesse sert au premier chargement
   }
 });
+
+
+// =============================
+// GOOGLE ONE TAP (page d'accueil uniquement)
+// =============================
+let oneTapStarted = false;
+
+async function startOneTap() {
+  if (oneTapStarted) return;
+
+  // Uniquement sur la home (body.home) et si la lib Google est chargée
+  if (!document.body || !document.body.classList.contains("home")) return;
+  if (!window.google || !google.accounts || !google.accounts.id) return;
+
+  oneTapStarted = true;
+
+  // On attend de savoir si l'utilisateur est déjà connecté
+  const user = await window.__prspkAuthReady;
+  if (user) return;
+
+  google.accounts.id.initialize({
+    client_id: GOOGLE_CLIENT_ID,
+    callback: async (response) => {
+      try {
+        const credential = GoogleAuthProvider.credential(response.credential);
+        await signInWithCredential(auth, credential);
+      } catch (err) {
+        console.error("Erreur One Tap:", err);
+      }
+    },
+    auto_select: false,
+    cancel_on_tap_outside: true,
+    use_fedcm_for_prompt: true,
+    itp_support: true
+  });
+
+  // Laisse le loader du site finir (2,6 s) avant d'afficher le prompt
+  setTimeout(() => {
+    if (!auth.currentUser) {
+      google.accounts.id.prompt();
+    }
+  }, 2800);
+}
+
+// Cas 1 : la lib Google se charge APRÈS ce module → elle appelle ce callback
+window.onGoogleLibraryLoad = startOneTap;
+// Cas 2 : la lib Google était DÉJÀ chargée avant ce module
+startOneTap();
 
 
 // =============================
