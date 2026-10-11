@@ -1,4 +1,4 @@
-const CACHE_NAME = 'perspikative-v1.3.7';
+const CACHE_NAME = 'perspikative-v1.3.8';
 
 // Fichiers essentiels
 const PRECACHE_ASSETS = [
