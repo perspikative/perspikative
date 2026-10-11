@@ -22,6 +22,7 @@
     --card: rgba(255, 255, 255, 0.7);
     --border: rgba(0, 0, 0, 0.1);
     --header-bg: rgba(91, 179, 163, 0.70);
+    --logo-filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08));
     --nav-mobile-bg: rgba(255, 255, 255, 0);
     --nav-mobile-shadow: 0 4px 22px 0px rgba(0, 0, 0, 0.1), 0 6px 32px 0px rgba(0, 0, 0, 0.18), inset 0 0 12px rgba(255, 255, 255, 0.3);
     --search-float-btn-bg: rgba(255, 255, 255, 0.2);
@@ -45,6 +46,7 @@
     --card: rgba(20, 22, 30, 0.7);
     --border: rgba(255, 255, 255, 0.12);
     --header-bg: rgba(0, 0, 0, 0.66);
+    --logo-filter: drop-shadow(2px 4px 18px rgba(0, 0, 0, 0.6));
     --nav-mobile-bg: rgba(0, 0, 0, 0.38);
     --nav-mobile-shadow: 0 -1px 8px 0px rgba(0, 0, 0, 0.1), 0 4px 32px 0px rgba(0, 0, 0, 0.18), 0 10px 52px 0px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(255, 255, 255, 0.3);
     --search-float-btn-bg: rgba(255, 255, 255, 0.12);
@@ -144,7 +146,7 @@ body {
 /* ============================= 3. HEADER ET NAVIGATION ============================= */
 
 header {
-  background: rgba(255 255 255 / 0.12);
+  background: rgba(255 255 255 / 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: white;
@@ -267,14 +269,12 @@ header h1 {
     top: 26px !important;
   }
 
-  /* On pousse le contenu du body pour compenser le bandeau fixed en haut,
-     UNIQUEMENT si la banderole est présente dans la page (:has) */
+
   body:has(.announcement-bar) {
     padding-top: 26px;
   }
 }
 
-/* --- Onglets de navigation --- */
 .nav-tabs {
   display: flex;
   justify-content: center;
@@ -289,7 +289,6 @@ header h1 {
   flex-wrap: wrap;
 }
 
-/* --- Cacher les onglets de navigation sur mobile --- */
 @media (max-width: 800px) {
   header {
     background: var(--header-bg);
@@ -339,7 +338,6 @@ header h1 {
     0 7px 17px rgba(0, 0, 0, 0.1);
 }
 
-/* --- MODIF : appliquer l’effet actif à tous les onglets --- */
 .nav-tabs .tab.active,
 .nav-tabs .tab:focus,
 .nav-tabs .tab:active {
@@ -357,7 +355,6 @@ header h1 {
   margin-top: 6px;
 }
 
-/* --- Structure du header --- */
 .header-content {
   display: flex;
   align-items: center;
@@ -369,7 +366,6 @@ header h1 {
   gap: 20px;
 }
 
-/* --- Logo styling --- */
 .logo img {
   height: 126px;
   width: auto;
@@ -377,7 +373,6 @@ header h1 {
   display: block;
 }
 
-/* --- Icône burger --- */
 .burger-icon {
   display: flex;
   align-items: center;
@@ -396,6 +391,7 @@ header h1 {
   .logo img {
     height: 70px;
     margin: 0;
+    filter: var(--logo-filter);
   }
 
   header {
@@ -676,7 +672,7 @@ main {
   padding: 10px 30px 15px 30px;
   max-width: 1100px;
   margin: 20px auto 30px auto;
-  background: rgba(255 255 255 / 0.12);
+  background: rgba(255 255 255 / 0.1);
   border-radius: 20px;
   border: 1px solid rgba(255 255 255 / 0.1);
   color: white;
@@ -2636,7 +2632,7 @@ ul {
 /* ============================= 16. FOOTER ============================= */
 
 footer {
-  background: rgba(255 255 255 / 0.12);
+  background: rgba(255 255 255 / 0.1);
   color: white;
   text-align: center;
   padding: 15px;
