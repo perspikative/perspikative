@@ -5539,12 +5539,26 @@ body {
 
 
 
+/* ===== Fondu du progressive blur tout en bas de page ===== */
 
+.nav-blur-layer {
+  opacity: 1;
+  /* Retour (quand on quitte le bas) : fade in très rapide */
+  transition: opacity 0.16s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
+/* Arrivée tout en bas : fondu dynamique vers 0 */
+.nav-blur-gradient.at-bottom .nav-blur-layer {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-
-
-
+@media (prefers-reduced-motion: reduce) {
+  .nav-blur-layer,
+  .nav-blur-gradient.at-bottom .nav-blur-layer {
+    transition-duration: 0.01s;
+  }
+}
 
 
 
@@ -6472,10 +6486,6 @@ body {
     transition: opacity 0.15s linear, visibility 0.15s linear, border-radius 0.15s linear;
   }
 }
-
-
-
-
 
 
 
