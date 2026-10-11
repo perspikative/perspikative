@@ -34,16 +34,20 @@ permalink: /profile
   }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    --profile-pic-edit-hint-bg: rgba(80, 179, 150, 1);
+    :root {
+       --profile-pic-edit-hint-bg: rgba(80, 179, 150, 1);
+      --skeleton-base: rgba(255, 255, 255, 0.12);
+      --skeleton-shine: rgba(255, 255, 255, 0.18);
+    }
   }
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --profile-pic-edit-hint-bg: rgba(45, 46, 50, 1);
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --profile-pic-edit-hint-bg: rgba(45, 46, 50, 1);
+      --skeleton-base: rgba(255, 255, 255, 0.09);
+      --skeleton-shine: rgba(255, 255, 255, 0.16);
+    }
   }
-}
 
   /* ============================= LAYOUT GENERAL ============================= */
 
@@ -474,20 +478,6 @@ permalink: /profile
     #accountId .skeleton-bar::after,
     .skeleton-avatar::after {
       animation: none;
-    }
-  }
-
-  @media (prefers-color-scheme: light) {
-    :root {
-      --skeleton-base: rgba(0, 0, 0, 0.09);
-      --skeleton-shine: rgba(0, 0, 0, 0.16);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --skeleton-base: rgba(255, 255, 255, 0.09);
-      --skeleton-shine: rgba(255, 255, 255, 0.22);
     }
   }
 
@@ -1936,7 +1926,7 @@ permalink: /profile
 
             <div class="public-url-card">
               <div class="public-url-info">
-                <span class="public-url-label">Ton profil public</span>
+                <span class="public-url-label">Profil public</span>
                 <span id="publicUrlValue">Choisis d'abord un nom d'utilisateur</span>
               </div>
               <a href="#" id="btnViewPublicProfile" class="btn-view-public is-disabled" target="_blank" rel="noopener">

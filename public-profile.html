@@ -35,6 +35,20 @@ permalink: /@
 <style>
   * { box-sizing: border-box; }
 
+  @media (prefers-color-scheme: light) {
+    :root {
+      --skeleton-base: rgba(255, 255, 255, 0.12);
+      --skeleton-shine: rgba(255, 255, 255, 0.18);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --skeleton-base: rgba(255, 255, 255, 0.09);
+      --skeleton-shine: rgba(255, 255, 255, 0.16);
+    }
+  }
+
   .pp-page {
     padding: 50px 140px 60px 140px;
     width: 100%;
@@ -320,20 +334,6 @@ permalink: /@
     #ppUsername .skeleton-bar::after,
     .skeleton-avatar::after {
       animation: none;
-    }
-  }
-
-  @media (prefers-color-scheme: light) {
-    :root {
-      --skeleton-base: rgba(0, 0, 0, 0.09);
-      --skeleton-shine: rgba(0, 0, 0, 0.16);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --skeleton-base: rgba(255, 255, 255, 0.09);
-      --skeleton-shine: rgba(255, 255, 255, 0.22);
     }
   }
 
