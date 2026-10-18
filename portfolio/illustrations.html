@@ -20,9 +20,12 @@ permalink: /portfolio/illustrations
   <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: light)">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/portfolio/portfolio.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap" rel="stylesheet" />
+  
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
   
   <script type="module" src="/js/firebase.js"></script>
@@ -30,6 +33,7 @@ permalink: /portfolio/illustrations
   <script defer src="/js/script-comments.js"></script>
   <script defer src="/js/comments-fade.js"></script>
   <script defer src="/js/nav-liquid-glass.js"></script>
+  <script defer src="/portfolio/portfolio.js"></script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="18d7b0fd-c5fb-4b2e-a43b-10cc734daa8f"></script>
 
   <style>
@@ -371,233 +375,6 @@ permalink: /portfolio/illustrations
   </div>
   <!-- ═══════════════════════════════════════════════════ -->
 
-  <script>
-    const menuToggle = document.getElementById('menuToggle');
-    menuToggle.addEventListener('change', (e) => {
-      document.body.classList.toggle('menu-open', e.target.checked);
-    });
-  </script>
-
-  <!-- ═══ ZOOM PLEIN ÉCRAN DE L'ŒUVRE (FLIP : depuis/vers la position d'origine) ═══ -->
-  <script>
-  (function () {
-    const sourceImg   = document.getElementById('lightbox-img');
-    const zoomOverlay = document.getElementById('zoom-overlay');
-    const zoomImg     = document.getElementById('zoom-img');
-
-    if (!sourceImg || !zoomOverlay || !zoomImg) return;
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const TRANSFORM_TRANSITION = reduceMotion
-      ? 'opacity .15s linear'
-      : 'transform 0.62s cubic-bezier(0.65, 0, 0.35, 1), border-radius 0.62s cubic-bezier(0.65, 0, 0.35, 1)';
-    const PINCH_TRANSITION = reduceMotion
-      ? 'opacity .15s linear'
-      : 'transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1)'; // léger overshoot, sensation "punchy" au double-zoom
-
-    function isTouchDevice() {
-      return window.matchMedia('(pointer: coarse)').matches;
-    }
-
-    let isZoomed = false;      // plein écran ouvert (taille "normale")
-    let isPinched = false;     // en plus, zoomé x2
-    let isAnimating = false;
-    let baseTarget = null;     // { left, top, width, height } de l'état plein écran "normal"
-
-    // Marge de respiration autour de l'image en plein écran (px), réduite sur mobile
-    function getViewportPadding() {
-      return window.innerWidth <= 700 ? 16 : 48;
-    }
-
-    // Calcule la taille finale de l'image centrée, en conservant son ratio,
-    // dans les limites du viewport moins la marge.
-    function computeTargetRect(naturalW, naturalH) {
-      const padding = getViewportPadding();
-      const maxW = window.innerWidth - padding * 2;
-      const maxH = window.innerHeight - padding * 2;
-      const ratio = Math.min(maxW / naturalW, maxH / naturalH, 1 /* jamais d'agrandissement au-delà du natif */);
-      const w = naturalW * ratio;
-      const h = naturalH * ratio;
-      return {
-        width: w,
-        height: h,
-        left: (window.innerWidth - w) / 2,
-        top: (window.innerHeight - h) / 2
-      };
-    }
-
-    function setTransform(rect, refWidth) {
-      const scaleX = rect.width / refWidth;
-      const scaleY = rect.height / (parseFloat(zoomImg.style.height) || rect.height);
-      zoomImg.style.transform = `translate(${rect.left}px, ${rect.top}px) scale(${scaleX}, ${scaleY})`;
-    }
-
-    function openZoom() {
-      if (isAnimating || isZoomed || !sourceImg.src) return;
-      isAnimating = true;
-
-      const startRect = sourceImg.getBoundingClientRect();
-      const naturalW = sourceImg.naturalWidth || startRect.width;
-      const naturalH = sourceImg.naturalHeight || startRect.height;
-
-      zoomImg.src = sourceImg.src;
-      zoomImg.alt = sourceImg.alt || '';
-
-      // Position/taille de départ = image cliquée (First), sans transition
-      zoomImg.style.transition = 'none';
-      zoomImg.style.height = startRect.height + 'px';
-      zoomImg.style.width = startRect.width + 'px';
-      zoomImg.style.transform = `translate(${startRect.left}px, ${startRect.top}px) scale(1)`;
-      zoomImg.classList.remove('zoom-flat');
-
-      sourceImg.classList.add('zoom-source-hidden');
-      zoomOverlay.classList.add('active');
-
-      requestAnimationFrame(() => {
-        void zoomImg.offsetHeight; // reflow forcé
-        zoomImg.style.transition = TRANSFORM_TRANSITION;
-
-        baseTarget = computeTargetRect(naturalW, naturalH);
-        zoomImg.style.height = startRect.height + 'px';
-        zoomImg.style.width = startRect.width + 'px';
-        setTransform(baseTarget, startRect.width);
-        zoomImg.classList.add('zoom-flat');
-      });
-
-      const onEnd = (e) => {
-        if (e.target !== zoomImg || e.propertyName !== 'transform') return;
-        zoomImg.removeEventListener('transitionend', onEnd);
-        isAnimating = false;
-        isZoomed = true;
-      };
-      zoomImg.addEventListener('transitionend', onEnd);
-    }
-
-    function closeZoom() {
-      if (isAnimating || !isZoomed) return;
-      isAnimating = true;
-      isPinched = false;
-
-      const endRect = sourceImg.getBoundingClientRect();
-      const currentHeight = parseFloat(zoomImg.style.height) || endRect.height;
-      const currentWidth  = parseFloat(zoomImg.style.width) || endRect.width;
-
-      requestAnimationFrame(() => {
-        void zoomImg.offsetHeight;
-        zoomImg.style.transition = TRANSFORM_TRANSITION;
-        const targetScaleX = endRect.width / currentWidth;
-        const targetScaleY = endRect.height / currentHeight;
-        zoomImg.style.transform = `translate(${endRect.left}px, ${endRect.top}px) scale(${targetScaleX}, ${targetScaleY})`;
-        zoomImg.classList.remove('zoom-flat');
-      });
-
-      const onEnd = (e) => {
-        if (e.target !== zoomImg || e.propertyName !== 'transform') return;
-        zoomImg.removeEventListener('transitionend', onEnd);
-        sourceImg.classList.remove('zoom-source-hidden');
-        zoomOverlay.classList.remove('active');
-        zoomImg.src = '';
-        baseTarget = null;
-        isAnimating = false;
-        isZoomed = false;
-      };
-      zoomImg.addEventListener('transitionend', onEnd);
-    }
-
-    // Zoom x2 in-place, centré sur le point de double-clic/double-tap.
-    // Un second double-clic/tap ramène à baseTarget (dézoom).
-    function togglePinchZoom(clientX, clientY) {
-      if (!isZoomed || isAnimating || !baseTarget) return;
-
-      zoomImg.style.transition = PINCH_TRANSITION;
-      void zoomImg.offsetHeight;
-
-      if (!isPinched) {
-        const factor = 2;
-        const w = baseTarget.width * factor;
-        const h = baseTarget.height * factor;
-        // Centre l'agrandissement sur le point cliqué, en restant dans le viewport
-        let left = baseTarget.left - (clientX - baseTarget.left) * (factor - 1);
-        let top  = baseTarget.top  - (clientY - baseTarget.top)  * (factor - 1);
-        const pad = getViewportPadding();
-        left = Math.min(pad, Math.max(window.innerWidth - w - pad, left));
-        top  = Math.min(pad, Math.max(window.innerHeight - h - pad, top));
-        setTransform({ left, top, width: w, height: h }, parseFloat(zoomImg.style.width));
-        isPinched = true;
-      } else {
-        setTransform(baseTarget, parseFloat(zoomImg.style.width));
-        isPinched = false;
-      }
-    }
-
-    // ─── Détection double-clic (desktop) / double-tap (mobile) sur l'image,
-    //     vs simple clic/tap qui ferme tout ──────────────────────────────
-    let clickCount = 0;
-    let clickTimer = null;
-    const DOUBLE_CLICK_DELAY = 280;
-
-    zoomImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      clickCount++;
-      if (clickCount === 1) {
-        clickTimer = setTimeout(() => {
-          clickCount = 0;
-          // Simple clic : sur desktop uniquement, ferme tout.
-          // Sur mobile, un simple tap sur l'image ne fait rien
-          // (fermeture réservée au clic sur l'overlay).
-          if (!isTouchDevice()) closeZoom();
-        }, DOUBLE_CLICK_DELAY);
-      } else {
-        clearTimeout(clickTimer);
-        clickCount = 0;
-        togglePinchZoom(e.clientX, e.clientY);
-      }
-    });
-
-    // Clic sur l'overlay (en dehors de l'image) : ferme toujours, mobile et desktop
-    zoomOverlay.addEventListener('click', () => {
-      closeZoom();
-    });
-
-    sourceImg.addEventListener('click', openZoom);
-
-    // Fermeture avec Échap
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isZoomed) closeZoom();
-    });
-
-    // Si la fenêtre est redimensionnée pendant le zoom, on recalcule la cible sans à-coup
-    window.addEventListener('resize', () => {
-      if (!isZoomed) return;
-      const naturalW = sourceImg.naturalWidth;
-      const naturalH = sourceImg.naturalHeight;
-      baseTarget = computeTargetRect(naturalW, naturalH);
-      zoomImg.style.transition = 'none';
-      setTransform(baseTarget, parseFloat(zoomImg.style.width));
-      isPinched = false;
-      void zoomImg.offsetHeight;
-      zoomImg.style.transition = TRANSFORM_TRANSITION;
-    });
-
-    // Si la lightbox parente se ferme (ou change d'image), on annule proprement le zoom
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox) {
-      const observer = new MutationObserver(() => {
-        if (!lightbox.classList.contains('active') && isZoomed) {
-          zoomOverlay.classList.remove('active', 'zoom-flat');
-          sourceImg.classList.remove('zoom-source-hidden');
-          zoomImg.src = '';
-          zoomImg.style.transition = 'none';
-          baseTarget = null;
-          isZoomed = false;
-          isPinched = false;
-          isAnimating = false;
-        }
-      });
-      observer.observe(lightbox, { attributes: true, attributeFilter: ['class'] });
-    }
-  })();
-  </script>
 
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>

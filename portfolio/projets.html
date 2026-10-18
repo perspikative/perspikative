@@ -20,9 +20,12 @@ permalink: /portfolio/projets
   <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: light)">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/portfolio/portfolio.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap" rel="stylesheet" />
+  
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
 
   <script type="module" src="/js/firebase.js"></script>
@@ -30,6 +33,7 @@ permalink: /portfolio/projets
   <script defer src="/js/script-comments.js"></script>
   <script defer src="/js/comments-fade.js"></script>
   <script defer src="/js/nav-liquid-glass.js"></script>
+  <script defer src="/portfolio/portfolio.js"></script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="18d7b0fd-c5fb-4b2e-a43b-10cc734daa8f"></script>
 </head>
 
@@ -325,6 +329,12 @@ permalink: /portfolio/projets
     </button>
   </div>
 
+  <!-- ═══ ZOOM PLEIN ÉCRAN DE L'ŒUVRE (clic sur l'image en lightbox) ═══ -->
+  <div id="zoom-overlay">
+    <img id="zoom-img" src="" alt="">
+  </div>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
   <!-- ═══ MINI LIGHTBOX : INVITATION À SE CONNECTER (like sans session) ═══ -->
   <div class="login-prompt-overlay" id="login-prompt-overlay">
     <div class="login-prompt-window">
@@ -363,12 +373,6 @@ permalink: /portfolio/projets
   </div>
   <!-- ═══════════════════════════════════════════════════ -->
 
-  <script>
-    const menuToggle = document.getElementById('menuToggle');
-    menuToggle.addEventListener('change', (e) => {
-      document.body.classList.toggle('menu-open', e.target.checked);
-    });
-  </script>
 
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>

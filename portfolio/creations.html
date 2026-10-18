@@ -20,9 +20,12 @@ permalink: /portfolio/creations
   <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: light)">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/portfolio/portfolio.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap" rel="stylesheet" />
+  
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
   
   <script type="module" src="/js/firebase.js"></script>
@@ -30,6 +33,7 @@ permalink: /portfolio/creations
   <script defer src="/js/script-comments.js"></script>
   <script defer src="/js/comments-fade.js"></script>
   <script defer src="/js/nav-liquid-glass.js"></script>
+  <script defer src="/portfolio/portfolio.js"></script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="18d7b0fd-c5fb-4b2e-a43b-10cc734daa8f"></script>
 </head>
 
@@ -1112,7 +1116,7 @@ permalink: /portfolio/creations
     <img src="/icons/rechercher.svg" alt="Rechercher">
   </a>
 
-  <!-- ═══ LIGHTBOX STRUCTURE ═══ -->
+  <!------ LIGHTBOX STRUCTURE ------>
   <div class="lightbox-overlay" id="lightbox">
     <div class="lightbox-window">
 
@@ -1139,7 +1143,7 @@ permalink: /portfolio/creations
         </div>
       </div>
 
-      <!-- ═══ Section commentaires ═══ -->
+      <!-- ═══ SECTION COMMENTAIRES ═══ -->
       <div class="lb-comments" id="lb-comments" data-comment>
 
         <div class="lb-comments-header">
@@ -1147,16 +1151,19 @@ permalink: /portfolio/creations
           <span class="lb-comments-count" id="lb-comments-count"></span>
         </div>
 
+        <!-- Liste des commentaires -->
         <div class="lb-comments-list" id="lb-comments-list">
           <div class="lb-comments-loading" id="lb-comments-loading">
             <span class="lb-spinner"></span>
           </div>
         </div>
 
+        <!-- Bouton "Afficher plus" -->
         <button class="lb-comments-more" id="lb-comments-more" style="display:none">
           Afficher plus
         </button>
 
+        <!-- Barre de saisie -->
         <div class="lb-comment-form" id="lb-comment-form">
 
           <!-- État : non connecté -->
@@ -1182,7 +1189,7 @@ permalink: /portfolio/creations
             </div>
           </div>
         </div>
-        <!-- ═══ -->
+        <!-- ═══════════════════════════════════════════ -->
 
       </div>
     </div>
@@ -1192,7 +1199,7 @@ permalink: /portfolio/creations
     <img src="/icons/fermer.svg" alt="Fermer">
   </button>
 
-  <!-- ═══ Flèches de navigation ═══ -->
+  <!-- Flèches de navigation (desktop : latérales / mobile : bloc en haut à gauche) -->
   <div class="lightbox-nav-arrows">
     <button class="lightbox-arrow lightbox-arrow-prev" id="lb-prev" aria-label="Précédent">
       <img src="/icons/arrow-left-lightbox.svg" alt="Précédent">
@@ -1202,7 +1209,13 @@ permalink: /portfolio/creations
     </button>
   </div>
 
-  <!-- ═══ Mini lightbox : connexion ═══ -->
+  <!-- ═══ ZOOM PLEIN ÉCRAN DE L'ŒUVRE (clic sur l'image en lightbox) ═══ -->
+  <div id="zoom-overlay">
+    <img id="zoom-img" src="" alt="">
+  </div>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- ═══ MINI LIGHTBOX : INVITATION À SE CONNECTER (like sans session) ═══ -->
   <div class="login-prompt-overlay" id="login-prompt-overlay">
     <div class="login-prompt-window">
       <button class="login-prompt-close" id="login-prompt-close" aria-label="Fermer">
@@ -1219,8 +1232,9 @@ permalink: /portfolio/creations
       <a href="/login" class="login-prompt-btn">Se connecter</a>
     </div>
   </div>
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
-  <!-- ═══ Mini lightbox : signalement de commentaires ═══ -->
+  <!-- ═══ MINI LIGHTBOX : SIGNALEMENT D'UN COMMENTAIRE ═══ -->
   <div class="report-overlay" id="report-overlay">
     <div class="report-window">
       <button class="report-close" id="report-close" aria-label="Fermer">
@@ -1231,19 +1245,14 @@ permalink: /portfolio/creations
       <p class="report-subtitle">Choisis la raison qui correspond le mieux</p>
 
       <div class="report-category-list" id="report-category-list">
-        <!-- Catégories générées en JS -->
+        <!-- Catégories + sous-catégories générées en JS (script-comments.js) -->
       </div>
 
       <p class="report-confirm" id="report-confirm"></p>
     </div>
   </div>
+  <!-- ═══════════════════════════════════════════════════ -->
 
-  <script>
-    const menuToggle = document.getElementById('menuToggle');
-    menuToggle.addEventListener('change', (e) => {
-      document.body.classList.toggle('menu-open', e.target.checked);
-    });
-  </script>
 
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
