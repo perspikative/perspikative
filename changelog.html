@@ -1,0 +1,655 @@
+---
+permalink: /changelog
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Changelog</title>
+  
+  <meta name="robots" content="noindex, follow">
+
+  <meta name="theme-color" content="#58b3a2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#344f4a" media="(prefers-color-scheme: dark)">
+
+  <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: light)">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="/style.css" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+  
+  <script defer src="/js/nav-liquid-glass.js"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="18d7b0fd-c5fb-4b2e-a43b-10cc734daa8f"></script>
+</head>
+  
+  <style>
+    .changelog-hero {
+      text-align: center;
+      padding: 30px 20px 20px 20px;
+      position: relative;
+    }
+
+    .changelog-title {
+      font-family: 'Maneola', 'Rubik', sans-serif;
+      font-size: 3.6rem;
+      margin: 0 0 10px 0;
+      letter-spacing: 2px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .changelog-subtitle {
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 680px;
+      margin: 0 auto 25px auto;
+      line-height: 1.3;
+      font-weight: 300;
+    }
+
+    /* Stat Cards Bar */
+    .changelog-stats {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .stat-badge {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.95);
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-badge strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Interactive Filter Bar */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 45px;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-family: 'Rubik', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), inset 0 0 8px rgba(255, 255, 255, 0.12);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15), inset 0 0 12px rgba(255, 255, 255, 0.18);
+    }
+
+    /* Timeline Container */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-left: 40px;
+      margin-bottom: 60px;
+    }
+
+    /* Glowing Timeline Vertical Line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      bottom: 20px;
+      left: 10px;
+      width: 3px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 90%, rgba(0, 0, 0, 0) 100%);
+      border-radius: 3px;
+    }
+
+    /* Timeline Version Item */
+    .timeline-item {
+      position: relative;
+      margin-bottom: 45px;
+      animation: softFadeInUp 0.8s ease forwards;
+    }
+
+    /* Timeline Node Pulse Dot */
+    .timeline-node {
+      position: absolute;
+      left: -30px;
+      top: 42px;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid rgba(44, 168, 119, 0.9);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 25px rgba(255, 255, 255, 0.4);
+      z-index: 2;
+    }
+
+    .timeline-item.latest .timeline-node {
+      background: #39FF14; /* Accent néon/subtil pour la dernière version */
+      border-color: #ffffff;
+      box-shadow: 0 0 20px #39FF14, 0 0 35px rgba(57, 255, 20, 0.6);
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 15px #39FF14; }
+      50% { transform: translateX(-50%) scale(1.25); box-shadow: 0 0 28px #39FF14, 0 0 45px rgba(57, 255, 20, 0.8); }
+    }
+
+    /* Version Glass Card */
+    .version-card {
+      background: rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: none;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.18), 0 10px 30px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .version-card:hover {
+      transform: translateY(-2px);
+      box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.25), 0 14px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Version Card Header */
+    .version-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 2.6px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .version-title-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .version-number {
+      font-family: 'Maneola', 'Rubik', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .version-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+
+    .version-badge.active-badge {
+      background: rgba(44, 168, 119, 0.35);
+      border-color: rgba(44, 168, 119, 0.7);
+      color: #a8ffda;
+    }
+
+    .version-date {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+    }
+
+    /* Log Groups & List Items */
+    .log-group {
+      margin-bottom: 20px;
+    }
+
+    .log-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .log-category-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .log-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .log-item {
+      position: relative;
+      padding-left: 22px;
+      font-size: 0.98rem;
+      line-height: 1.3;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .log-item::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .log-item strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .changelog-title {
+        font-size: 2.2rem;
+      }
+      .changelog-subtitle {
+        font-size: 1rem;
+      }
+      .timeline {
+        padding-left: 22px;
+        position: relative;
+        max-width: 330px;
+        margin: 0 auto;
+        margin-bottom: 60px;
+      }
+
+      .timeline::before {
+        left: 6px;
+      }
+      .timeline-node {
+        left: -16.5px;
+        top: 31px;
+        width: 14px;
+        height: 14px;
+      }
+      .version-card {
+        padding: 20px;
+      }
+      .version-number {
+        font-size: 1.8rem;
+      }
+      .version-art-title {
+        font-size: 1.15rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="mobile-nav">
+    <a href="/" class="nav-icon" title="Accueil">
+      <img src="/icons/accueil.svg" alt="Accueil">
+    </a>
+    <a href="/portfolio" class="nav-icon" title="Portfolio">
+      <img src="/icons/portfolio.svg" alt="Portfolio">
+    </a>
+    <a href="/rechercher" class="nav-icon" title="Rechercher">
+      <img src="/icons/rechercher.svg" alt="Rechercher">
+    </a>
+    <a href="/actus" class="nav-icon" title="Actus">
+      <img src="/icons/actus.svg" alt="Actus">
+    </a>
+    <a href="/profile" class="nav-icon" title="Profil">
+      <img src="/icons/profile.svg" alt="Profil">
+    </a>
+  </nav>
+
+  <div class="nav-blur-gradient" aria-hidden="true">
+    <span class="nav-blur-layer nav-blur-layer--1"></span>
+    <span class="nav-blur-layer nav-blur-layer--2"></span>
+    <span class="nav-blur-layer nav-blur-layer--3"></span>
+    <span class="nav-blur-layer nav-blur-layer--4"></span>
+    <span class="nav-blur-layer nav-blur-layer--5"></span>
+  </div>
+
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <a href="/"><img src="/logo.svg" alt="Perspikative logo"></a>
+      </div>
+
+      <div class="nav-right">
+        <ul class="nav-tabs">
+          <li>
+            <a href="/" class="tab">
+              <img src="/icons/accueil.svg" alt="" class="tab-icon"> ACCUEIL
+            </a>
+          </li>
+          <li>
+            <a href="/portfolio" class="tab">
+              <img src="/icons/portfolio.svg" alt="" class="tab-icon"> PORTFOLIO
+            </a>
+          </li>
+          <li>
+            <a href="/actus" class="tab">
+              <img src="/icons/actus.svg" alt="" class="tab-icon"> ACTUS
+            </a>
+          </li>
+          <li>
+            <a href="/profile" class="tab">
+              <img src="/icons/profile.svg" alt="" class="tab-icon"> PROFIL
+            </a>
+          </li>
+        </ul>
+
+        <input type="checkbox" id="menuToggle" />
+        <label for="menuToggle" class="burger-icon" title="Menu">
+          <img id="menuIcon" src="icons/menu.svg" alt="Menu">
+        </label>
+      <div class="mobile-menu">
+        <ul>
+          <li><a href="/commu">COMMUNAUTÉ</a></li>
+          <li><a href="/art-challenge">ART CHALLENGE</a></li>
+          <li><a href="/contact">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="blur-overlay"></div>
+    
+    <section class="changelog-hero">
+      <h1 class="changelog-title">CHANGELOG</h1>
+      <p class="changelog-subtitle">
+        Changelog de Perspikative. Retracez toutes les versions du site et découvrez les nouveautés.
+      </p>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterLogs('all')">Tous les changements</button>
+        <button class="filter-btn" onclick="filterLogs('feature')">✨ Nouveautés</button>
+        <button class="filter-btn" onclick="filterLogs('design')">🎨 Design & UI</button>
+        <button class="filter-btn" onclick="filterLogs('performance')">⚡ Performance & Fixes</button>
+      </div>
+    </section>
+
+    <div class="timeline">
+
+      <div class="timeline-item latest" data-categories="feature design performance">
+        <div class="timeline-node"></div>
+        <article class="version-card">
+          <div class="version-header">
+            <div class="version-title-group">
+              <span class="version-number">v1.3.0</span>
+              <span class="version-badge active-badge">Dernière Release</span>
+            </div>
+            <span class="version-date">Juillet 2026</span>
+          </div>
+
+          <div class="log-group" data-group="feature">
+            <div class="log-category-title">✨ Nouveautés Majeures</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Espace Communauté & Art Challenges :</strong> Intégration de la section dédiée au hub artistique et liens directs vers la communauté WhatsApp.</li>
+              <li class="log-item"><strong>Lightbox Immersive HD :</strong> Modal de visionnage plein écran pour les créations avec détails textuels, typographie Maneola et flou d'arrière-plan poussé à 500px.</li>
+              <li class="log-item"><strong>Navigation "Liquid Glass" sur Mobile :</strong> Intégration d'une barre de navigation flottante à réfraction de verre dynamique sur smartphone.</li>
+            </ul>
+          </div>
+
+          <div class="log-group" data-group="design">
+            <div class="log-category-title">🎨 Design & Direction Artistique</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Harmonisation Bi-Thème :</strong> Équilibrage subtil des gradients en mode clair émeraude et noir profond (`#0e0f13`) en mode sombre.</li>
+              <li class="log-item"><strong>Typographie Maneola globale :</strong> Application de la police sur l'ensemble des titres majeurs et fenêtres modales.</li>
+            </ul>
+          </div>
+
+          <div class="log-group" data-group="performance">
+            <div class="log-category-title">⚡ Performance & Fluidité</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Barre de défilement stable :</strong> Ajout de `scrollbar-gutter: stable` pour éliminer tout saut d'affichage au chargement.</li>
+              <li class="log-item"><strong>Optimisation des images :</strong> Chargement progressif des vignettes pour une meilleure réactivité globale.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="timeline-item" data-categories="feature design performance">
+        <div class="timeline-node"></div>
+        <article class="version-card">
+          <div class="version-header">
+            <div class="version-title-group">
+              <span class="version-number">v1.2.0</span>
+              <span class="version-badge">Version Stable</span>
+            </div>
+            <span class="version-date">Mars 2026</span>
+          </div>
+
+          <div class="log-group" data-group="feature">
+            <div class="log-category-title">✨ Nouveautés Majeures</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Grille Masonry Dynamique :</strong> Reconfiguration de la section Créations en grille fluide responsive à 3 colonnes.</li>
+              <li class="log-item"><strong>Featured Creation Video :</strong> Vitrine vidéo interactive en format vertical avec iframe intégrée.</li>
+            </ul>
+          </div>
+
+          <div class="log-group" data-group="design">
+            <div class="log-category-title">🎨 Design & UI</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Cartes Glassmorphism v2 :</strong> Refonte des cartes portfolio avec bordures translucides et reflets internes au survol (`hover`).</li>
+              <li class="log-item"><strong>Boutons Pilules Dépolis :</strong> Nouveaux styles de boutons glassmorphism ultra-doux.</li>
+            </ul>
+          </div>
+
+          <div class="log-group" data-group="performance">
+            <div class="log-category-title">⚡ Performance & Scroll</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Lissage de défilement Lenis :</strong> Intégration du moteur Lenis Scroll pour un défilement ultra-fluide.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="timeline-item" data-categories="feature design performance">
+        <div class="timeline-node"></div>
+        <article class="version-card">
+          <div class="version-header">
+            <div class="version-title-group">
+              <span class="version-number">v1.1.0</span>
+              <span class="version-badge">Mise à jour majeure</span>
+            </div>
+            <span class="version-date">Novembre 2025</span>
+          </div>
+
+          <div class="log-group" data-group="feature">
+            <div class="log-category-title">✨ Nouveautés Majeures</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Police Custom Maneola :</strong> Importation et intégration des fichiers de police `@font-face` (`Maneola-Regular.woff2`).</li>
+              <li class="log-item"><strong>Tiroir Navigation Mobile :</strong> Création du menu latéral déroulant avec flou global d'arrière-plan.</li>
+            </ul>
+          </div>
+
+          <div class="log-group" data-group="design">
+            <div class="log-category-title">🎨 Design & UI</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Gestionnaire Bi-Thème Négatif/Positif :</strong> Prise en charge native de `prefers-color-scheme` (Clair & Sombre).</li>
+            </ul>
+          </div>
+
+          <div class="log-group" data-group="performance">
+            <div class="log-category-title">⚡ Ergonomie Tactile</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Désactivation des halos tactiles :</strong> Suppression du surlignage bleu par défaut sur mobile pour une sensation applicative native.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="timeline-item" data-categories="feature design">
+        <div class="timeline-node"></div>
+        <article class="version-card">
+          <div class="version-header">
+            <div class="version-title-group">
+              <span class="version-number">v1.0.0</span>
+              <span class="version-badge">Lancement du site</span>
+            </div>
+            <span class="version-date">Février 2026</span>
+          </div>
+
+          <div class="log-group" data-group="feature">
+            <div class="log-category-title">✨ Nouveautés Majeures</div>
+            <ul class="log-list">
+              <li class="log-item"><strong>Lancement Officiel de Perspikative :</strong> Déploiement de la première version du portfolio et espace d'art personnel.</li>
+              <li class="log-item"><strong>Structure Glassmorphism d'origine :</strong> Définition du Header dépoli, des cartes d'exposition et de la typographie Rubik.</li>
+              <li class="log-item"><strong>Galerie Portfolio Fondatrice :</strong> Mise en place des premières catégories d'œuvres.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://linktr.ee/perspikative" target="_blank" aria-label="Linktree">
+        <img src="/icons/linktree.svg" alt="Linktree">
+      </a>
+     <a href="https://www.whatsapp.com/channel/0029VaKP3Kd5Ui2gky1r5m3y" target="_blank" aria-label="Chaîne WhatsApp">
+        <img src="/icons/whatsapp-channel.svg" alt="Chaîne WhatsApp">
+      </a>
+      <a href="https://www.instagram.com/perspikative" target="_blank" aria-label="Instagram">
+        <img src="/icons/instagram.svg" alt="Instagram">
+      </a>
+      <a href="https://discord.com/invite/c5w9ucgDZH" target="_blank" aria-label="Discord">
+        <img src="/icons/discord.svg" alt="Discord">
+      </a>
+      <a href="https://youtube.com/@perspikative" target="_blank" aria-label="YouTube">
+        <img src="/icons/youtube.svg" alt="YouTube">
+      </a>
+    </div>
+
+    <p>&copy; 2026 Perspikative™. Tous droits réservés.</p>
+    <p><a href="/mentions-legales" class="footer-link">Mentions légales</a></p>
+    <p><a href="/politique-de-confidentialite" class="footer-link">Politique de confidentialité</a></p>
+    <p><a href="/terms-of-service" class="footer-link">Conditions d'utilisation</a></p>
+    <p><a href="/help-center" class="footer-link">Centre d'aide</a></p>
+    <p><a href="/position-ia" class="footer-link">Position sur l'IA</a></p>
+    <p><a href="/brand-guidelines" class="footer-link">Brand guidelines</a></p>
+  </footer>
+
+  <a href="/rechercher" class="search-float-btn" title="Rechercher">
+    <img src="/icons/rechercher.svg" alt="Rechercher">
+  </a>
+
+  <script>
+    // --- 1. Script de Filtrage Dynamique du Changelog ---
+    function filterLogs(category) {
+      // Mettre à jour l'état actif des boutons
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const items = document.querySelectorAll('.timeline-item');
+
+      items.forEach(item => {
+        const groups = item.querySelectorAll('.log-group');
+        
+        if (category === 'all') {
+          item.style.display = 'block';
+          groups.forEach(g => g.style.display = 'block');
+        } else {
+          let hasVisibleGroup = false;
+          groups.forEach(group => {
+            if (group.getAttribute('data-group') === category) {
+              group.style.display = 'block';
+              hasVisibleGroup = true;
+            } else {
+              group.style.display = 'none';
+            }
+          });
+
+          // Afficher ou cacher la carte selon si elle possède du contenu filtré
+          if (hasVisibleGroup) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    // --- 2. Synchronisation de l'Overlay du Menu Mobile ---
+    const menuToggle = document.getElementById('menuToggle');
+    const blurOverlay = document.querySelector('.blur-overlay');
+
+    if (menuToggle && blurOverlay) {
+      menuToggle.addEventListener('change', () => {
+        if (menuToggle.checked) {
+          document.body.classList.add('menu-open');
+        } else {
+          document.body.classList.remove('menu-open');
+        }
+      });
+
+      blurOverlay.addEventListener('click', () => {
+        menuToggle.checked = false;
+        document.body.classList.remove('menu-open');
+      });
+    }
+  </script>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    menuToggle.addEventListener('change', (e) => {
+      document.body.classList.toggle('menu-open', e.target.checked);
+    });
+  </script>
+
+  <script src="/script.js"></script>
+</body>
+</html>

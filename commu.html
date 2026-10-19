@@ -19,10 +19,13 @@ permalink: /commu
   <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: light)">
 
-  <link rel="stylesheet" href="/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+  <link rel="stylesheet" href="/style.css" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+  
   <script defer src="/js/nav-liquid-glass.js"></script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="18d7b0fd-c5fb-4b2e-a43b-10cc734daa8f"></script>
   
@@ -46,6 +49,8 @@ permalink: /commu
       --glass-inset:  inset 0 0 10px rgba(255, 255, 255, 0.25), 0 8px 16px rgba(0, 0, 0, 0.12);
       --glass-inset-strong: inset 0 0 8px rgba(255,255,255,0.22), 0 12px 24px rgba(0,0,0,0.18);
     }
+
+    html { scroll-behavior: smooth; }
 
     /* ─── HERO ───────────────────────────────────────────── */
     .hero {
@@ -509,8 +514,8 @@ permalink: /commu
 <body class="home">
 
   <nav class="mobile-nav">
-    <a href="/" class="nav-icon active" title="Accueil">
-      <img src="/icons/accueil-active.svg" alt="Accueil">
+    <a href="/" class="nav-icon" title="Accueil">
+      <img src="/icons/accueil.svg" alt="Accueil">
     </a>
     <a href="/portfolio" class="nav-icon" title="Portfolio">
       <img src="/icons/portfolio.svg" alt="Portfolio">
@@ -533,7 +538,7 @@ permalink: /commu
     <span class="nav-blur-layer nav-blur-layer--4"></span>
     <span class="nav-blur-layer nav-blur-layer--5"></span>
   </div>
-  
+
   <header>
     <div class="header-content">
       <div class="logo">
@@ -543,8 +548,8 @@ permalink: /commu
       <div class="nav-right">
         <ul class="nav-tabs">
           <li>
-            <a href="/" class="tab active">
-              <img src="/icons/accueil-active.svg" alt="" class="tab-icon"> ACCUEIL
+            <a href="/" class="tab">
+              <img src="/icons/accueil.svg" alt="" class="tab-icon"> ACCUEIL
             </a>
           </li>
           <li>
@@ -572,7 +577,7 @@ permalink: /commu
         <ul>
           <li><a href="/commu">COMMUNAUTÉ</a></li>
           <li><a href="/art-challenge">ART CHALLENGE</a></li>
-          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">CONTACT</a></li>
         </ul>
       </div>
     </div>
@@ -584,7 +589,147 @@ permalink: /commu
 <section class="hero">
   <div class="hero-badge"><span class="dot"></span>Espace Communauté</div>
   <h1>SHAPE<br>WHAT'S NEXT.</h1>
-  <p>Perspikative, c'est pas juste un portfolio — c'est un projet vivant. Cette nouvelle page arrive prochainement !</p>
+  <p>Perspikative, c'est pas juste un portfolio — c'est un projet vivant. Découvre la team qui l'anime et les espaces pour vivre l'évolution de l'intérieur.</p>
+
+  <div class="hero-actions">
+    <a href="#perspikateam" class="btn btn-primary">
+      La Perspikateam 
+      <img src="icons/retour.svg" alt="" class="icon">
+    </a>
+    <a href="#beta" class="btn btn-ghost">Beta Program</a>
+    <a href="#whatsapp" class="btn btn-ghost">Canal WhatsApp</a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PERSPIKATEAM -->
+<section class="team-section" id="perspikateam">
+  <div class="container">
+    <div class="team-header reveal">
+      <div>
+        <div class="section-eyebrow">Siège social</div>
+        <h2 class="section-title">La <span class="grad">Perspikateam</span></h2>
+        <p class="section-desc">Un cercle restreint de personnes impliquées dans l'administration de Perspikative. Collaborateurs, créatifs, esprits curieux — ils aident au contenu posté sur Perspikative.</p>
+      </div>
+    </div>
+
+    <div class="team-grid">
+      <div class="glass-card team-card reveal" style="transition-delay:0.05s">
+        <img src="icons/projets.svg" alt="Icône Projets" class="team-card-icon">
+        <h3>Créatifs & Artistes</h3>
+        <p>Ils font des retours sur les dessins de Perspikative. Ils donnent de nouvelles idées pour les créations suivantes et m'aident à m'améliorer.</p>
+      </div>
+      <div class="glass-card team-card reveal" style="transition-delay:0.1s">
+        <img src="icons/edit.svg" alt="Icône Développement" class="team-card-icon">
+        <h3>Rédacteurs & Builders</h3>
+        <p>Ils font des retours sur le contenu posté par Perspikative , testent les prototypes et font tourner la machine technique.</p>
+      </div>
+      <div class="glass-card team-card reveal" style="transition-delay:0.15s">
+        <img src="icons/explore.svg" alt="Icône Explorer" class="team-card-icon">
+        <h3>Stratèges & Curateurs</h3>
+        <p>Ils orientent les décisions de contenu, la direction éditoriale et la vision à long terme du projet.</p>
+      </div>
+    </div>
+
+    <div class="team-notice reveal" style="transition-delay:0.2s">
+      <img src="icons/confidentialite.svg" alt="Icône Cadenas" class="team-card-icon">
+      <div class="team-notice-text">
+        <h4>Recrutement fermé</h4>
+        <p>A l'heure actuelle, aucune nouvelle candidature n'est acceptée — tout passe par invitation directe.</p>
+      </div>
+      <div class="status-pill"><span class="blink"></span>En activité</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BETA PROGRAM -->
+<section class="beta-section" id="beta">
+  <div class="container">
+    <div style="margin-bottom:48px" class="reveal">
+      <div class="section-eyebrow">Programme officiel</div>
+      <h2 class="section-title">Perspikative<br><span class="grad">Beta Program</span></h2>
+      <p class="section-desc">Accès anticipé aux nouvelles fonctionnalités du site avant tout le monde. Tu testes, tu donnes ton avis, et tu contribues au futur de Perspikative.</p>
+    </div>
+
+    <div class="glass-card beta-main-card reveal">
+      <div class="beta-layout">
+        <!-- Perks -->
+        <div class="beta-perks">
+          <div class="beta-perk">
+            <img src="icons/rocket.svg" alt="Icône Fusée" class="team-card-icon">
+            <div class="beta-perk-text">
+              <h4>Accès anticipé</h4>
+              <p>Tu es parmi les premiers à voir les nouvelles pages, fonctionnalités, articles et bien plus avant leur mise en ligne.</p>
+            </div>
+          </div>
+          <div class="beta-perk">
+            <img src="icons/forum.svg" alt="Icône Feedback" class="team-card-icon">
+            <div class="beta-perk-text">
+              <h4>Feedback direct</h4>
+              <p>Tes retours sont lus soigneusement et pris en compte. Toutes tes contributions comptent et idées sont précieuses.</p>
+            </div>
+          </div>
+          <div class="beta-perk">
+            <img src="icons/crown.svg" alt="Icône Exclusivité" class="team-card-icon">
+            <div class="beta-perk-text">
+              <h4>Contenu exclusif</h4>
+              <p>Certaines expériences restent réservées aux membres Beta. Un accès que les autres n'auront pas.</p>
+            </div>
+          </div>
+          <div class="beta-perk">
+            <img src="icons/perspikateam.svg" alt="Icône Perspikateam" class="team-card-icon">
+            <div class="beta-perk-text">
+              <h4>Porte vers la Perspikateam</h4>
+              <p>Les membres du programme les plus actifs peuvent être invités à rejoindre la Perspikateam sur des projets futurs.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA col -->
+        <div class="beta-cta-col">
+          <div class="beta-cta-badge">✦ Inscriptions ouvertes</div>
+          <h3>Rejoins la<br><span class="grad">prochaine vague</span></h3>
+          <p>Places disponibles pour les testeurs de la prochaine session. 2 formulaires à compléter et t'es dedans !</p>
+          <a href="https://tr.ee/M2KOck8xu5" target="_blank" rel="noopener" class="btn btn-linktree">
+            S'inscrire via Linktree
+          </a>
+          <div class="beta-places">
+            <span>🟢</span>
+            <span>Places <strong>limitées</strong> · Vague en cours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- WHATSAPP -->
+<section class="whatsapp-section" id="whatsapp">
+  <div class="container">
+    <div style="margin-bottom:34px" class="reveal">
+      <div class="section-eyebrow">Canal officiel</div>
+      <h2 class="section-title">La <span class="grad">communauté</span><br>en direct</h2>
+    </div>
+
+    <div class="glass-card wa-card reveal">
+      <div class="wa-layout">
+        <img src="icons/whatsapp.svg" alt="Icône WhatsApp" class="team-card-icon">
+        <div class="wa-text">
+          <h3>Chaîne <span class="wa-grad">WhatsApp</span><br>Perspikative</h3>
+          <p>Les coulisses en temps réel. Nouveaux posts, infos exclusives, FAQ, concours... et tout ce qui se passe dans l'univers Perspikative, directement dans ta poche. Une chaîne pour les plus connectés et ne rien manquer.</p>
+        </div>
+        </div>
+        <a href="https://whatsapp.com/channel/perspikative" target="_blank" rel="noopener" class="btn btn-whatsapp">
+          Rejoindre le canal 📲
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 
   <footer>
@@ -598,17 +743,18 @@ permalink: /commu
       <a href="https://www.instagram.com/perspikative" target="_blank" aria-label="Instagram">
         <img src="/icons/instagram.svg" alt="Instagram">
       </a>
+      <a href="https://discord.com/invite/c5w9ucgDZH" target="_blank" aria-label="Discord">
+        <img src="/icons/discord.svg" alt="Discord">
+      </a>
       <a href="https://youtube.com/@perspikative" target="_blank" aria-label="YouTube">
         <img src="/icons/youtube.svg" alt="YouTube">
-      </a>
-      <a href="https://www.pinterest.com/perspikative" target="_blank" aria-label="Pinterest">
-        <img src="/icons/pinterest.svg" alt="Pinterest">
       </a>
     </div>
 
     <p>&copy; 2026 Perspikative™. Tous droits réservés.</p>
     <p><a href="/mentions-legales" class="footer-link">Mentions légales</a></p>
     <p><a href="/politique-de-confidentialite" class="footer-link">Politique de confidentialité</a></p>
+    <p><a href="/terms-of-service" class="footer-link">Conditions d'utilisation</a></p>
     <p><a href="/help-center" class="footer-link">Centre d'aide</a></p>
     <p><a href="/position-ia" class="footer-link">Position sur l'IA</a></p>
     <p><a href="/brand-guidelines" class="footer-link">Brand guidelines</a></p>

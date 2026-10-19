@@ -1,0 +1,763 @@
+---
+permalink: /about
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>À propos</title>
+
+  <meta name="description" content="Appelez moi Tartineske. Sortez le pot de pop-corn, Perspikative a une histoire complexe.">
+  <meta name="keywords" content="Perspikative, à propos, artiste, histoire, blog, art visuel, processus créatif, qui suis-je, communauté">
+  <meta name="robots" content="index, follow">
+
+  <meta name="theme-color" content="#58b3a2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#344f4a" media="(prefers-color-scheme: dark)">
+
+  <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: light)">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="/style.css" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+  
+  <script defer src="/js/nav-liquid-glass.js"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="18d7b0fd-c5fb-4b2e-a43b-10cc734daa8f"></script>
+</head>
+
+  <style>
+    :root {
+      --ap-text: #ffffff;
+      --ap-muted: #ffffff;
+      --ap-accent: #0a4a44;
+
+      --ap-cta-bg: linear-gradient(135deg, #0b3d36, #0f5a50);
+      --ap-cta-fg: #e8f3f0;
+
+      --ap-grab: rgba(4, 35, 29, .35);
+      --ap-grab-hover: rgba(4, 35, 29, .6);
+
+      --ap-panel-bg: rgba(255, 255, 255, .28);
+      --ap-panel-border: rgba(4, 35, 29, .14);
+      --ap-panel-hi: rgba(255, 255, 255, .5);
+      --ap-glow: rgba(255, 255, 255, .35);
+      --ap-dash: rgba(4, 35, 29, .35);
+
+      --ap-edge: rgba(255, 255, 255, .4);
+      --ap-lift: rgba(0, 0, 0, .3);
+
+      /* Fonds des cartes, de la première à la huitième */
+      --ap-s1: #55b0a0;
+      --ap-s2: #5fb7a7;
+      --ap-s3: #6bbeb0;
+      --ap-s4: #78c5b7;
+      --ap-s5: #86ccbf;
+      --ap-s6: #94d3c7;
+      --ap-s7: #a3dacf;
+      --ap-s8: #b2e1d8;
+
+      --ap-strip: 44px;     /* hauteur d’un bandeau (= cible tactile mini) */
+      --ap-radius: 24px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ap-text: #e8f3f0;
+        --ap-muted: #ffffff;
+        --ap-accent: #5eead4;
+
+        --ap-cta-bg: linear-gradient(135deg, #5eead4, #22d3ee);
+        --ap-cta-fg: #04231d;
+
+        --ap-grab: rgba(255, 255, 255, .28);
+        --ap-grab-hover: rgba(255, 255, 255, .5);
+
+        --ap-panel-bg: rgba(255, 255, 255, .04);
+        --ap-panel-border: rgba(255, 255, 255, .09);
+        --ap-panel-hi: rgba(255, 255, 255, .1);
+        --ap-glow: rgba(94, 234, 212, .18);
+        --ap-dash: rgba(255, 255, 255, .25);
+
+        --ap-edge: rgba(255, 255, 255, .12);
+        --ap-lift: rgba(0, 0, 0, .55);
+
+        --ap-s1: #27272b;
+        --ap-s2: #27272b;
+        --ap-s3: #27272b;
+        --ap-s4: #27272b;
+        --ap-s5: #27272b;
+        --ap-s6: #27272b;
+        --ap-s7: #27272b;
+        --ap-s8: #27272b;
+      }
+    }
+
+    @media (min-width: 900px) {
+      :root { --ap-strip: 52px; --ap-radius: 32px; }
+    }
+
+    .ap-skip {
+      position: absolute;
+      left: -9999px;
+      top: 8px;
+      z-index: 100;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--ap-cta-bg);
+      color: var(--ap-cta-fg);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .ap-skip:focus { left: 12px; }
+
+    /* Pleine largeur : aucun padding horizontal / marge / max-width sur le main.
+       Un peu d'espace au-dessus et en dessous de la pile de sections
+       (ajuste --ap-gap pour en avoir plus ou moins). */
+    .ap-main {
+      --ap-gap: clamp(16px, 3vw, 40px);
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: var(--ap-gap) 0;
+      background: #00000000;
+      color: var(--ap-text);
+      font-family: "Rubik", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      box-shadow: none;
+      border: 0;
+    }
+
+    .ap-main *, .ap-main *::before, .ap-main *::after { box-sizing: border-box; }
+
+    /* ---------- La pile ---------- */
+    .ap-stack {
+      --ap-top: 0px;       /* réglé en JS : bas du header s’il est fixe / sticky */
+      position: relative;
+      width: 100%;
+      /* clip (et non hidden) pour ne pas casser le position: sticky */
+      border-radius: var(--ap-radius);
+      overflow: clip;
+    }
+
+    /* Chaque carte colle en haut, décalée d’un bandeau par rang :
+       les cartes suivantes glissent par-dessus et il ne reste visible
+       que le bandeau des cartes passées. */
+    .ap-card {
+      --surface: var(--ap-s1);
+      --i: 0;
+      position: sticky;
+      top: calc(var(--ap-top) + var(--i) * var(--ap-strip));
+      height: calc(100vh - var(--ap-top) - var(--i) * var(--ap-strip));
+      height: calc(100svh - var(--ap-top) - var(--i) * var(--ap-strip));
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border-radius: var(--ap-radius) var(--ap-radius) 0 0;
+      box-shadow: inset 0 1px 0 var(--ap-edge), 0 -14px 36px -12px var(--ap-lift);
+      overflow: hidden;
+      color-scheme: light dark;
+    }
+    .ap-card:nth-of-type(1) { --surface: var(--ap-s1); }
+    .ap-card:nth-of-type(2) { --surface: var(--ap-s2); }
+    .ap-card:nth-of-type(3) { --surface: var(--ap-s3); }
+    .ap-card:nth-of-type(4) { --surface: var(--ap-s4); }
+    .ap-card:nth-of-type(5) { --surface: var(--ap-s5); }
+    .ap-card:nth-of-type(6) { --surface: var(--ap-s6); }
+    .ap-card:nth-of-type(7) { --surface: var(--ap-s7); }
+    .ap-card:nth-of-type(8) { --surface: var(--ap-s8); }
+
+    /* Dernière carte : coins du bas arrondis aussi */
+    .ap-stack > .ap-card:last-of-type {
+      border-radius: var(--ap-radius) var(--ap-radius) var(--ap-radius) var(--ap-radius);
+    }
+
+    /* ---------- Bandeau (titre cliquable) ---------- */
+    .ap-tab {
+      position: relative;
+      z-index: 2;
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: var(--ap-strip);
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--ap-muted);
+      font-family: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ap-tab > * { grid-area: 1 / 1; }
+
+    /* La « poignée » disparaît quand le titre apparaît (carte recouverte) */
+    .ap-tab-grabber {
+      width: 36px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--ap-grab);
+      opacity: calc(1 - var(--lab, 0));
+      transition: background .2s;
+    }
+    .ap-tab:hover .ap-tab-grabber { background: var(--ap-grab-hover); }
+
+    /* Même grille que le contenu : le titre se place à droite.
+       Mobile : aligné à droite. Desktop : centré dans la colonne de droite,
+       pile au-dessus du texte. */
+    .ap-tab-row {
+      justify-self: center;
+      width: 100%;
+      max-width: calc(1120px + 2 * clamp(20px, 5vw, 64px));
+      padding-inline: clamp(20px, 5vw, 64px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: center;
+    }
+
+    .ap-tab-label {
+      grid-column: 1;
+      justify-self: start;
+      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .9rem;
+      font-weight: 800;
+      letter-spacing: .01em;
+      opacity: var(--lab, 0);
+      transition: color .2s;
+      text-transform: uppercase;
+    }
+    .ap-tab-label svg { width: 14px; height: 14px; flex: none; }
+    .ap-tab:hover .ap-tab-label { color: var(--ap-text); }
+
+    .ap-tab:focus-visible { outline: 2px solid var(--ap-accent); outline-offset: -4px; }
+    .ap-tab:focus-visible .ap-tab-label { opacity: 1; }
+    .ap-tab:focus-visible .ap-tab-grabber { opacity: 0; }
+
+    /* ---------- Contenu de la carte ---------- */
+    .ap-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0 clamp(20px, 5vw, 64px);
+      overflow-y: auto;          /* filet de sécurité : très gros texte / petit écran */
+      scrollbar-width: thin;
+    }
+
+    /* margin:auto = centrage vertical qui ne coupe jamais le haut si ça déborde */
+    .ap-inner {
+      width: 100%;
+      max-width: 1120px;
+      margin: auto;
+      padding-block: 12px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    /* Illustration */
+    .ap-art {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: clamp(96px, 22svh, 240px);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: var(--ap-radius);
+      background: var(--ap-panel-bg);
+      border: 1px solid var(--ap-panel-border);
+      box-shadow: inset 0 1px 0 var(--ap-panel-hi);
+    }
+
+    .ap-art img {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .ap-art-fallback {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      border: 1.5px dashed var(--ap-dash);
+      border-radius: calc(var(--ap-radius) - 8px);
+      color: var(--ap-muted);
+      font-size: .8rem;
+      text-align: center;
+      word-break: break-all;
+    }
+
+    /* Texte */
+    .ap-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      max-width: 36rem;
+    }
+    .ap-title {
+      margin: 0;
+      font-size: clamp(1.6rem, 6.4vw, 2.1rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .ap-p {
+      margin: 0;
+      color: var(--ap-muted);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      text-align: justify;
+      text-align-last: center;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
+
+    .ap-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: var(--ap-cta-bg);
+      color: var(--ap-cta-fg);
+      font-size: .95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .ap-cta:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .ap-cta:focus-visible { outline: 2px solid var(--ap-text); outline-offset: 3px; }
+
+    /* ---------- Desktop : illustration à gauche, texte à droite ---------- */
+    @media (min-width: 900px) {
+      .ap-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(32px, 6vw, 96px);
+        text-align: left;
+      }
+      .ap-tab-row {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: clamp(32px, 6vw, 96px);
+      }
+      .ap-tab-label {
+        grid-column: 1;
+        justify-self: start;
+      }
+      .ap-art {
+        max-width: none;
+        height: clamp(200px, 52svh, 460px);
+        padding: 24px;
+      }
+      .ap-text {
+        align-items: flex-start;
+        justify-self: center;
+        max-width: 30rem;
+        gap: 18px;
+      }
+      .ap-title { font-size: clamp(2.6rem, 3.4vw, 3.2rem); text-transform: uppercase; font-weight: 900; line-height: 0.9; letter-spacing: -0.03em; color: #ffffff; }
+      .ap-p {
+        font-size: 1.125rem;
+        text-align: left;
+        text-align-last: auto;
+        text-wrap: pretty;
+      }
+    }
+
+    /* ---------- Accessibilité : mouvement réduit ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      .ap-cta, .ap-tab-grabber, .ap-tab-label { transition: none; }
+      .ap-cta:hover { transform: none; }
+    }
+
+    .ap-noscript { padding: 48px 24px; text-align: center; color: var(--ap-muted); }
+  </style>
+</head>
+
+<body>
+  <a class="ap-skip" href="#contenu">Aller au contenu</a>
+  
+  <nav class="mobile-nav">
+    <a href="/" class="nav-icon" title="Accueil">
+      <img src="/icons/accueil.svg" alt="Accueil">
+    </a>
+    <a href="/portfolio" class="nav-icon" title="Portfolio">
+      <img src="/icons/portfolio.svg" alt="Portfolio">
+    </a>
+    <a href="/rechercher" class="nav-icon" title="Rechercher">
+      <img src="/icons/rechercher.svg" alt="Rechercher">
+    </a>
+    <a href="/actus" class="nav-icon" title="Actus">
+      <img src="/icons/actus.svg" alt="Actus">
+    </a>
+    <a href="/profile" class="nav-icon" title="Profil">
+      <img src="/icons/profile.svg" alt="Profil">
+    </a>
+  </nav>
+
+  <div class="nav-blur-gradient" aria-hidden="true">
+    <span class="nav-blur-layer nav-blur-layer--1"></span>
+    <span class="nav-blur-layer nav-blur-layer--2"></span>
+    <span class="nav-blur-layer nav-blur-layer--3"></span>
+    <span class="nav-blur-layer nav-blur-layer--4"></span>
+    <span class="nav-blur-layer nav-blur-layer--5"></span>
+  </div>
+
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <a href="/"><img src="/logo.svg" alt="Perspikative logo"></a>
+      </div>
+
+      <div class="nav-right">
+        <ul class="nav-tabs">
+          <li>
+            <a href="/" class="tab">
+              <img src="/icons/accueil.svg" alt="" class="tab-icon"> ACCUEIL
+            </a>
+          </li>
+          <li>
+            <a href="/portfolio" class="tab">
+              <img src="/icons/portfolio.svg" alt="" class="tab-icon"> PORTFOLIO
+            </a>
+          </li>
+          <li>
+            <a href="/actus" class="tab">
+              <img src="/icons/actus.svg" alt="" class="tab-icon"> ACTUS
+            </a>
+          </li>
+          <li>
+            <a href="/profile" class="tab">
+              <img src="/icons/profile.svg" alt="" class="tab-icon"> PROFIL
+            </a>
+          </li>
+        </ul>
+
+        <input type="checkbox" id="menuToggle" />
+        <label for="menuToggle" class="burger-icon" title="Menu">
+          <img id="menuIcon" src="icons/menu.svg" alt="Menu">
+        </label>
+      <div class="mobile-menu">
+        <ul>
+          <li><a href="/commu">COMMUNAUTÉ</a></li>
+          <li><a href="/art-challenge">ART CHALLENGE</a></li>
+          <li><a href="/contact">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="blur-overlay"></div>
+
+  <main id="contenu" class="ap-main">
+    <div id="apropos-root"></div>
+    <noscript>
+      <p class="ap-noscript">Cette page a besoin de JavaScript pour fonctionner. Active-le pour découvrir l'univers de Perspikative.</p>
+    </noscript>
+  </main>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://linktr.ee/perspikative" target="_blank" aria-label="Linktree">
+        <img src="/icons/linktree.svg" alt="Linktree">
+      </a>
+     <a href="https://www.whatsapp.com/channel/0029VaKP3Kd5Ui2gky1r5m3y" target="_blank" aria-label="Chaîne WhatsApp">
+        <img src="/icons/whatsapp-channel.svg" alt="Chaîne WhatsApp">
+      </a>
+      <a href="https://www.instagram.com/perspikative" target="_blank" aria-label="Instagram">
+        <img src="/icons/instagram.svg" alt="Instagram">
+      </a>
+      <a href="https://discord.com/invite/c5w9ucgDZH" target="_blank" aria-label="Discord">
+        <img src="/icons/discord.svg" alt="Discord">
+      </a>
+      <a href="https://youtube.com/@perspikative" target="_blank" aria-label="YouTube">
+        <img src="/icons/youtube.svg" alt="YouTube">
+      </a>
+    </div>
+
+    <p>&copy; 2026 Perspikative™. Tous droits réservés.</p>
+    <p><a href="/mentions-legales" class="footer-link">Mentions légales</a></p>
+    <p><a href="/politique-de-confidentialite" class="footer-link">Politique de confidentialité</a></p>
+    <p><a href="/terms-of-service" class="footer-link">Conditions d'utilisation</a></p>
+    <p><a href="/help-center" class="footer-link">Centre d'aide</a></p>
+    <p><a href="/position-ia" class="footer-link">Position sur l'IA</a></p>
+    <p><a href="/brand-guidelines" class="footer-link">Brand guidelines</a></p>
+  </footer>
+
+  <a href="/rechercher" class="search-float-btn" title="Rechercher">
+    <img src="/icons/rechercher.svg" alt="Rechercher">
+  </a>
+
+  <script src="/script.js"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js" crossorigin></script>
+
+  <script>
+  (function () {
+    "use strict";
+
+    var useRef = React.useRef;
+    var useState = React.useState;
+    var useEffect = React.useEffect;
+    var useCallback = React.useCallback;
+    var html = htm.bind(React.createElement);
+
+    /* ===================================================================
+       CONTENU — modifie / ajoute / supprime des sections ici.
+       Les illustrations sont cherchées dans /pics/cat/cat1.svg, cat2.svg…
+       =================================================================== */
+    var SECTIONS = [
+      {
+        id: "mais-qui-suis-je",
+        title: "Mais qui suis-je ?",
+        img: "/pics/cat/cat-classic.svg",
+        alt: "Illustration : qui est Tartineske",
+        text: "Appelez moi Tartineske (prononcez taʁtinɛːsk). Je suis le fondateur de Perspikative (vous croyiez que j'étais qui?). Dans la vie, j'aime beaucoup de choses. Perspikative rassemble quelques de mes passions, comme le dessin, le graphisme, le développement web, la création de contenu… Mais j'adore aussi écouter de la musique, aller courir, lire, écrire, faire des courts-métrages, apprendre des langues, jouer à Minecraft, aussi. Mon envie débordante d'apprendre de nouvelles choses et d'expérimenter ne m'a jamais quitté. Derrière Perspikative se cache…",
+      },
+      {
+        id: "origine-du-commencement",
+        title: "L'origine du commencement",
+        img: "/pics/cat/cat-classic.svg",
+        alt: "Illustration : le portfolio Perspikative",
+        text: "À l'origine du commencement, là où tout a commencé, il y a eu le commencement : WhatsApp. Perspikative est né le 11 février 2024. Sa naissance était un peu imprévue, j'avoue. J'ai commencé à poster mes premiers dessins sur la chaîne. Assez rapidement, c'est là que c'est devenu intéressant : j'ai justement découvert que Perspikative pouvait être infini, complètement ce qu’il voulait. Et quand on ne me fixe aucune barrière, je ne m'en fixe aucune. C'est ainsi que Perspikative a grandi si vite…",
+        cta: { label: "Explorer le portfolio", href: "/portfolio" }
+      },
+      {
+        id: "mmmh-perspikative",
+        title: "Mmmh, Perspikative",
+        img: "/pics/cat/cat-classic.svg",
+        alt: "Illustration : l'histoire de Perspikative",
+        text: "Perspikative a prit une grande place dans ma vie. J'y ai appris un tas de choses avec, on dirait pas comme ça. Perspikative m'a fait braver l'inconnu comme je ne l'aurai jamais imaginé. Bon, pas de là à gravir l'Everest, mais il se trouve qu'on peut se créer des comptes Perspikative (vous trouvez pas ça génial ??). Ça témoigne de l'ampleur du projet. De toute façon, je savais très bien que si je dessinais juste, j'allais me lasser un jour ou l'autre. Perspikative est bien plus joli ainsi, mêlant plusieurs choses que j'aime, vous ne trouvez pas ?"
+      },
+      {
+        id: "une-adorable-communaute",
+        title: "Une adorable communauté",
+        img: "/pics/cat/cat-book-404.svg",
+        alt: "Illustration : la communauté Perspikative",
+        text: "La plupart des personnes qui m'ont parlé de Perspikative semblaient sous le charme. Me faisiez-vous simplement plaisir, où vous êtes vraiment charmés quand vous arrivez sur mon site ? Personnellement, je sais que je passe un temps monstre sur celui-ci, telle un narcissique devant son miroir. Je suis assez fier de mon œuvre disons aussi. En tous cas, j'adore quand on me parle de Perspikative. Je peux en parler pendant des heures avec vous. J'essaye toujours d'améliorer ce que je fais.",
+        cta: { label: "Rejoindre la communauté", href: "/commu" }
+      }
+    ];
+
+    var reduceMotion = function () {
+      return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    };
+
+    /* Ton header : si il est fixe / sticky (flottant sur mobile), les cartes
+       se collent SOUS lui pour que les titres des bandeaux restent visibles. */
+    var HEADER_SELECTOR = "header, .site-header";
+    var HEADER_GAP = 8;   // petit espace entre le header et les bandeaux
+
+    /* ---------- Illustration (avec repli si le fichier n’existe pas encore) ---------- */
+    function Illustration(props) {
+      var failed = useState(false);
+      if (failed[0]) {
+        return html`<div className="ap-art-fallback" role="img" aria-label="Illustration à venir">${props.src}</div>`;
+      }
+      return html`<img src=${props.src} alt=${props.alt} loading=${props.eager ? "eager" : "lazy"} decoding="async" onError=${function () { failed[1](true); }} />`;
+    }
+
+    /* ---------- Une carte de la pile ---------- */
+    function Card(props) {
+      var s = props.section;
+      var i = props.index;
+      var cardStyle = { "--i": i };
+      return html`
+        <section className="ap-card" id=${s.id} aria-labelledby=${s.id + "-titre"}
+                 ref=${function (el) { props.cardRefs.current[i] = el; }}
+                 style=${cardStyle}>
+          <button type="button" className="ap-tab"
+                  aria-label=${"Aller à la section « " + s.title + " »"}
+                  onClick=${function () { props.onTabClick(i); }}>
+            <span className="ap-tab-grabber" aria-hidden="true"></span>
+            <span className="ap-tab-row" aria-hidden="true">
+              <span className="ap-tab-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="m6 15 6-6 6 6" /></svg>
+                ${s.title}
+              </span>
+            </span>
+          </button>
+
+          <div className="ap-body">
+            <div className="ap-inner">
+              <div className="ap-art">
+                <${Illustration} src=${s.img} alt=${s.alt} eager=${i === 0} />
+              </div>
+              <div className="ap-text">
+                <h2 className="ap-title" id=${s.id + "-titre"}>${s.title}</h2>
+                <p className="ap-p">${s.text}</p>
+                ${s.cta ? html`<a className="ap-cta" href=${s.cta.href}>${s.cta.label}</a>` : null}
+              </div>
+            </div>
+          </div>
+        </section>`;
+    }
+
+    /* ---------- L’application ---------- */
+    function App() {
+      var stackRef = useRef(null);
+      var cardRefs = useRef([]);
+      var geo = useRef({ ys: [] });   // scrollY auquel chaque carte « colle » en haut
+      var raf = useRef(0);
+
+      /* Position d’avancement continue (0 → n-1) : pilote l’apparition des titres */
+      var update = useCallback(function () {
+        var ys = geo.current.ys;
+        var cards = cardRefs.current;
+        if (!ys.length) return;
+
+        var y = window.scrollY;
+        var last = ys.length - 1;
+        var t = 0;
+        if (y >= ys[last]) {
+          t = last;
+        } else if (y > ys[0]) {
+          var j = 0;
+          while (j < last - 1 && y >= ys[j + 1]) j++;
+          t = j + (y - ys[j]) / ((ys[j + 1] - ys[j]) || 1);
+        }
+
+        var active = Math.round(t);
+        for (var i = 0; i < cards.length; i++) {
+          var c = cards[i];
+          if (!c) continue;
+          var k = Math.max(0, Math.min(t - i, 4));                 // à quel point la carte est recouverte
+          var lab = Math.max(0, Math.min((k - 0.25) / 0.5, 1));    // opacité du titre du bandeau
+          c.style.setProperty("--lab", lab.toFixed(3));
+          var tab = c.querySelector(".ap-tab");
+          if (tab) {
+            if (i === active) tab.setAttribute("aria-current", "location");
+            else tab.removeAttribute("aria-current");
+          }
+        }
+      }, []);
+
+      /* Mesure : où doit-on scroller pour amener chaque carte en position ? */
+      var measure = useCallback(function () {
+        var stack = stackRef.current;
+        var cards = cardRefs.current;
+        if (!stack || !cards.length) return;
+
+        // Header fixe ou sticky : les cartes se collent juste en dessous
+        var header = document.querySelector(HEADER_SELECTOR);
+        var apTop = 0;
+        if (header) {
+          var cs = getComputedStyle(header);
+          var rect = header.getBoundingClientRect();
+          if (cs.position === "fixed") {
+            apTop = Math.max(0, rect.bottom) + HEADER_GAP;
+          } else if (cs.position === "sticky") {
+            apTop = (parseFloat(cs.top) || 0) + rect.height + HEADER_GAP;
+          }
+        }
+        stack.style.setProperty("--ap-top", apTop + "px");
+
+        var stackTop = stack.getBoundingClientRect().top + window.scrollY;
+        var acc = 0;
+        var ys = [];
+        for (var i = 0; i < cards.length; i++) {
+          var c = cards[i];
+          var stickyTop = parseFloat(getComputedStyle(c).top) || 0;
+          ys.push(stackTop + acc - stickyTop);
+          acc += c.offsetHeight;
+        }
+        geo.current = { ys: ys };
+        update();
+      }, [update]);
+
+      var scrollToSection = useCallback(function (i, opts) {
+        opts = opts || {};
+        var y = geo.current.ys[i];
+        if (y == null) return;
+        window.scrollTo({
+          top: Math.max(0, y),
+          behavior: (opts.instant || reduceMotion()) ? "auto" : "smooth"
+        });
+        if (opts.updateHash !== false && window.history && history.replaceState) {
+          history.replaceState(null, "", "#" + SECTIONS[i].id);
+        }
+      }, []);
+
+      useEffect(function () {
+        function goToHash(instant) {
+          var id = decodeURIComponent(location.hash.slice(1));
+          var idx = -1;
+          for (var i = 0; i < SECTIONS.length; i++) if (SECTIONS[i].id === id) idx = i;
+          if (idx >= 0) scrollToSection(idx, { instant: instant === true, updateHash: false });
+        }
+        function onScroll() {
+          if (raf.current) return;
+          raf.current = requestAnimationFrame(function () { raf.current = 0; update(); });
+        }
+        var timer;
+        function onResize() { clearTimeout(timer); timer = setTimeout(measure, 80); }
+        function onLoad() { measure(); goToHash(true); }
+        function onHash(e) { goToHash(e); }
+
+        measure();
+        requestAnimationFrame(function () { goToHash(true); });
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onResize);
+        window.addEventListener("load", onLoad);
+        window.addEventListener("hashchange", onHash);
+
+        var ro = null;
+        if ("ResizeObserver" in window) {
+          ro = new ResizeObserver(onResize);
+          ro.observe(document.body);
+          var h = document.querySelector(HEADER_SELECTOR);
+          if (h) ro.observe(h);
+        }
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+        return function () {
+          clearTimeout(timer);
+          cancelAnimationFrame(raf.current);
+          window.removeEventListener("scroll", onScroll);
+          window.removeEventListener("resize", onResize);
+          window.removeEventListener("load", onLoad);
+          window.removeEventListener("hashchange", onHash);
+          if (ro) ro.disconnect();
+        };
+      }, [measure, update, scrollToSection]);
+
+      return html`
+        <div className="ap-stack" ref=${stackRef}>
+          ${SECTIONS.map(function (s, i) {
+            return html`<${Card} key=${s.id} section=${s} index=${i} cardRefs=${cardRefs} onTabClick=${scrollToSection} />`;
+          })}
+        </div>`;
+    }
+
+    ReactDOM.createRoot(document.getElementById("apropos-root")).render(html`<${App} />`);
+  })();
+  </script>
+</body>
+</html>
