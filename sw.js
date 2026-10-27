@@ -1,4 +1,4 @@
-const CACHE_NAME = 'perspikative-v1.4.0';
+const CACHE_NAME = 'perspikative-v1.4.1';
 
 // Fichiers essentiels
 const PRECACHE_ASSETS = [
@@ -6,6 +6,7 @@ const PRECACHE_ASSETS = [
    '/@',
   '/404',
   '/actus',
+  '/actus/_layouts/article.html',
   '/art-challenge',
   '/auth',
   '/commu/beta-program',
@@ -31,6 +32,7 @@ const PRECACHE_ASSETS = [
   '/rechercher',
   '/script.js',
   '/style.css',
+  '/actus/actus.css',
   '/js/auth-handler.js',
   '/js/comments-fade.js',
   '/js/firebase.js',
