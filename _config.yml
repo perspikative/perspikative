@@ -1,0 +1,4 @@
+# Configuration minimale pour le modèle d'articles Perspikative.
+# Le reste du site continue d'utiliser ses fichiers HTML/CSS habituels.
+url: "https://perspikative.com"
+layouts_dir: actus/_layouts
