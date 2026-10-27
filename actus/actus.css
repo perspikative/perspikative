@@ -1,13 +1,15 @@
 /* Container général */
 .article-page {
-  padding: 60px 30px 60px 30px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 38px;
 }
 
 /* Hero — titre + image + date */
 .article-hero {
+  width: 100%;
   max-width: 900px;
   text-align: center;
 }
@@ -25,7 +27,7 @@
 .article-cover {
   aspect-ratio: 5 / 3;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 30px;
   opacity: 0;
   animation: fadeUp 1s ease forwards;
   box-shadow: 0 8px 18px rgba(0,0,0,0.08);
@@ -47,42 +49,34 @@
 .article-date {
   font-size: 1.1rem;
   opacity: 0.8;
-  letter-spacing: 0.2rem;
-  text-transform: uppercase;
+  letter-spacing: 0.22rem;
   margin: 0;
+  text-transform: uppercase;
+  text-align: center;
 }
 
-/* Bloc meta : date + auteurs (desktop = sur la même ligne) */
+.article-date-label {
+  font-weight: 500;
+}
+
+/* La date reste seule et centrée sous le titre. */
 .article-meta {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px;
+  width: 100%;
   margin-top: 0.6rem;
   margin-bottom: 3rem;
-}
-
-.article-meta::before {
-  content: "•";
-  opacity: 0.5;
-}
-
-.article-meta .article-date {
-  order: -1;
-}
-
-.article-authors {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  text-align: center;
 }
 
 .authors-label {
-  font-size: 1.1rem;
-  opacity: 0.8;
-  letter-spacing: 0.2rem;
-  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
 }
 
 /* Avatars empilés */
@@ -97,10 +91,11 @@
   height: 36px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-left: -20px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  flex: 0 0 auto;
+  transition: all 0.2s ease;
+  margin-left: -16px;
 }
 
 .authors-avatars .author-avatar:first-child {
@@ -121,7 +116,7 @@
 }
 
 .author-avatar:hover {
-  transform: translateY(-3px) scale(1.06);
+  transform: scale(1.06);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
   z-index: 999 !important;
 }
@@ -131,8 +126,8 @@
   max-width: 900px;
   width: 100%;
   font-family: "Rubik", system-ui, sans-serif;
-  line-height: 1;
-  margin-bottom: 4rem;
+  line-height: 1.1;
+  margin-bottom: 5.6rem;
 }
 
 .article-lead {
@@ -140,12 +135,16 @@
   font-weight: 600;
   margin-bottom: -10px;
   letter-spacing: -0.6px;
+  padding-right: 36px;
+  padding-left: 36px;
 }
 
 .article-body p:not(.article-lead) {
   opacity: 0.9;
   font-size: 1.15rem;
   letter-spacing: -0.1px;
+  padding-right: 36px;
+  padding-left: 36px;
 }
 
 .article-body ul {
@@ -165,6 +164,8 @@
 .article-related {
   width: 100%;
   max-width: 1200px;
+  align-self: center;
+  margin-bottom: 3.6rem;
 }
 
 .article-related h2 {
@@ -172,6 +173,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 1.6rem;
+  color: #ffffff;
   letter-spacing: 0.08rem;
   text-transform: uppercase;
   margin-top: 1rem;
@@ -187,56 +189,46 @@
 /* Responsive */
 @media (max-width: 768px) {
   .article-page {
-    padding-left: 0px; !important
-    padding-right: 0px; !important
+    padding: 0;
     gap: 20px;
-    padding-top: 50px;
   }
 
   .article-title {
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     line-height: 2rem;
-    margin-top: 0.8rem;
-    letter-spacing: 0.03rem;
+    margin: 0.6rem;
+    margin-top: 1rem;
+    letter-spacing: 0.04rem;
   }
 
   .article-hero {
-    padding: 0 20px;
+    padding: 0;
     margin-bottom: -10px;
   }
 
   .article-body {
-    padding: 0 20px;
+    padding: 0px;
+    margin-bottom: 2.8rem;
   }
 
   .article-related {
     width: 100%;
     max-width: 1200px;
+    margin-bottom: 3.6rem;
   }
   
   .article-date {
     font-size: 0.96rem;
-    letter-spacing: 0.2rem;
-  }
-  
-  .authors-label {
-    font-size: 0.96rem;
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.16rem;
   }
 
   .article-meta {
-    flex-direction: column;
-    gap: 1px;
     margin-top: 0.8rem;
     margin-bottom: 2.6rem;
   }
 
-  .article-meta::before {
-    display: none;
-  }
-
   .article-cover {
-    border-radius: 16px;
+    border-radius: 26px;
     opacity: 0;
     animation: fadeUp 1s ease forwards;
     box-shadow: 0 8px 18px rgba(0,0,0,0.08);
@@ -245,14 +237,10 @@
 
 @media (max-width: 800px) {
   main.article-page {
-    padding-left: 30px !important;
-    padding-right: 30px !important;
+    padding-left: 0px;
   }
 }
 
-
-
-/* Bouton Download */
 .btn-glass {
   padding: 8px 16px;
   font-size: 1.1rem;
@@ -271,7 +259,6 @@
   margin-top: -40px;
 }
 
-
 .btn-glass:hover {
   background: rgba(255, 255, 255, 0.1);
   box-shadow:
@@ -279,69 +266,99 @@
     inset 0 0 10px rgba(255 255 255 / 0.3);
 }
 
-
-
-/* Partage d'article */
-.article-share{
+.article-actions {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 10px;
   width: 100%;
-  margin-right: 100px;
-  margin-bottom: 60px;
+  max-width: 900px;
+  margin-right: 40px;
+  margin-bottom: 24px;
 }
 
-/* Bouton principal */
-.share-button{
+.authors-button,
+.share-button {
   display: flex;
-  gap: 6px;
-  padding: 12px 20px;
-  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 7px;
+  padding-left: 16px;
   border: none;
-  background: rgba(20,20,20,0.65);
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1), inset 0 0 8px rgba(255, 255, 255, 0.16);
   color: white;
   font-family: "Rubik", system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  opacity: 0.9;
-  transition: 
-    background 0.25s ease,
-    transform 0.2s ease,
-    box-shadow 0.25s ease;
+  line-height: 1.2;
+  opacity: 0.95;
+  box-sizing: border-box;
 }
 
-/* Icône */
-.share-icon{
+.authors-button {
+  flex: 0 0 auto;
+}
+
+.share-button {
+  gap: 8px;
+  padding: 7px 20px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.share-icon {
   width: 19px;
   height: 19px;
+  flex: 0 0 auto;
   opacity: 0.9;
-  transition: 
-    width 0.2s ease,
-    height 0.2s ease,
-    opacity 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
-/* Hover desktop */
-.share-button:hover{
-  background: rgba(20,20,20,0.7);
-  transform: translateX(2px);
+.share-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1), inset 0 0 8px rgba(255, 255, 255, 0.18);
 }
 
-/* Click */
-.share-button:active{
+.share-button:active {
   transform: translateY(0);
 }
 
-/* Responsive */
-@media (max-width: 700px){
-  .article-share{
-    display: flex;
+@media (max-width: 768px) {
+  .article-actions {
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin-right: 0px;
+    gap: 10px;
+    width: 100%;
+    padding: 0 16px;
+    margin: 38px;
+    box-sizing: border-box;
   }
 
-  .share-button{
-    margin-right: 0;
+  .authors-button,
+  .share-button {
+    width: 100%;
+    max-width: 300px;
+    min-height: 20px;
+  }
+
+  .authors-button {
+    justify-content: center;
+    background: none;
+    box-shadow: none;
+    border: none;
+    padding: 6px;
+  }
+
+  .share-button {
+    margin: 0;
+    padding: 12px;
   }
 }
