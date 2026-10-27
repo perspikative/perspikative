@@ -91,7 +91,7 @@ related_articles:
   Après des mois d'essais et de nombreux ratés, la mascotte officielle de Perspikative a été révélée ! Son charadesign unique a été recherché et travaillé pour incarner l'esprit de Perspikative : un mélange de sérieux et decréativité. Elle est désormais cachée un peu partout sur le site web pour vous accompagner.
 </p>
 <p>
-  Je remercie encore mille fois <a href="https://www.instagram.com/supernovaaa_art_/" target="_blank">@supernovaaa_art_</a> pour son aide sur la mascotte ! Grâce à ses conseils précieux et son oeil d'artiste, elle a su m'accompagner dans ce projet ambitieux, qui n'aurait probablement jamais vu le jour sans elle. N'hésitez pas à faire un tour sur <a href="https://www.instagram.com/supernovaaa_art_/" target="_blank">son Instagram</a> pour découvrir ce qu'elle fait !
+  Je remercie encore mille fois <a href="https://www.instagram.com/supernova_draws/" target="_blank">@supernova_draws</a> pour son aide sur la mascotte ! Grâce à ses conseils précieux et son oeil d'artiste, elle a su m'accompagner dans ce projet ambitieux, qui n'aurait probablement jamais vu le jour sans elle. N'hésitez pas à faire un tour sur <a href="https://www.instagram.com/supernova_draws/" target="_blank">son Instagram</a> pour découvrir ce qu'elle fait !
 </p>
 
 <p class="article-lead">
