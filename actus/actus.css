@@ -174,7 +174,7 @@
   font-weight: 700;
   line-height: 1.6rem;
   color: #ffffff;
-  letter-spacing: 0.08rem;
+  letter-spacing: 0.03rem;
   text-transform: uppercase;
   margin-top: 1rem;
 }
@@ -183,6 +183,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 35px;
+  margin: 10px;
 }
 
 
@@ -232,6 +233,10 @@
     opacity: 0;
     animation: fadeUp 1s ease forwards;
     box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  }
+
+  .related-grid {
+    margin: 26px;
   }
 }
 
