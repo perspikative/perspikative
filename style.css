@@ -469,10 +469,15 @@ header h1 {
   box-shadow: var(--mobile-menu-shadow);
   transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateY(-10px);
+  transform: translateY(-10px) translateZ(0);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  /* Force sa propre couche de rendu : évite les saccades de Safari quand
+     un élément avec box-shadow/backdrop est animé sans être "promu" en couche GPU */
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .blur-overlay {
@@ -488,6 +493,7 @@ header h1 {
   pointer-events: none;
   transition: opacity 0.32s cubic-bezier(0.32, 0, 0.08, 0.97);
   z-index: 900;
+  will-change: opacity;
 }
 
 main,
@@ -549,9 +555,67 @@ body.menu-open .blur-overlay {
   display: flex;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.5s ease, transform 0.5s ease; /* plus doux */
   visibility: visible;
   pointer-events: auto;
+  /* Le menu "tombe" légèrement du haut puis rebondit à peine avant de se stabiliser */
+  animation: menu-drop-bounce 0.46s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Coupe la transition de base pendant l'ouverture : Safari peut saccader
+     quand une transition et une animation portent sur les mêmes propriétés en même temps */
+  transition: none;
+}
+
+@keyframes menu-drop-bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px) translateZ(0);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(2px) translateZ(0);
+  }
+  78% {
+    transform: translateY(-1px) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+/* Les boutons du menu suivent le même mouvement, à peine décalés dans le temps */
+#menuToggle:checked ~ .mobile-menu ul li a {
+  animation: menu-item-bounce 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+#menuToggle:checked ~ .mobile-menu ul li:nth-child(1) a { animation-delay: 0.04s; }
+#menuToggle:checked ~ .mobile-menu ul li:nth-child(2) a { animation-delay: 0.07s; }
+#menuToggle:checked ~ .mobile-menu ul li:nth-child(3) a { animation-delay: 0.10s; }
+#menuToggle:checked ~ .mobile-menu ul li:nth-child(4) a { animation-delay: 0.13s; }
+#menuToggle:checked ~ .mobile-menu ul li:nth-child(5) a { animation-delay: 0.16s; }
+
+@keyframes menu-item-bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) translateZ(0);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(1px) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #menuToggle:checked ~ .mobile-menu,
+  #menuToggle:checked ~ .mobile-menu ul li a {
+    animation: none;
+  }
 }
 
 
