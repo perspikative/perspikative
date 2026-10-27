@@ -197,8 +197,8 @@
     font-size: 2.2rem;
     line-height: 2rem;
     margin: 0.6rem;
-    margin-top: 1rem;
-    letter-spacing: 0.04rem;
+    margin-top: 1.3rem;
+    letter-spacing: 0.03rem;
   }
 
   .article-hero {
@@ -223,8 +223,8 @@
   }
 
   .article-meta {
-    margin-top: 0.8rem;
-    margin-bottom: 2.6rem;
+    margin-top: -0.2rem;
+    margin-bottom: 2.2rem;
   }
 
   .article-cover {
