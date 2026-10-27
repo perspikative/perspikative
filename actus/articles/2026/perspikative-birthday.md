@@ -3,8 +3,8 @@ layout: article
 permalink: /actus/2026/perspikative-birthday
 
 title: "Perspikative Birthday"
-date: 2026-04-04
-published_date: "Publié le 4 avril 2026"
+date: 2026-02-17
+published_date: "Publié le 17 février 2026"
 description: "Perspikative fête ses 2 ans ! Découvrez la programmation exclusive de la semaine : quiz, concours, dessin spécial et d'autres surprises..."
 keywords:
   - Perspikative
@@ -32,10 +32,6 @@ share_text: "Découvre cet article sur Perspikative !"
 authors:
   - "Dsj5CIxUn8bqhhgdACxBcaB4HFB2"
 
-cta:
-  label: "Télécharger le pack"
-  url: /rechercher
-
 related_articles:
   - title: "Nouveautés de la recherche"
     url: /actus/2026/nouveautes-de-la-recherche
@@ -60,54 +56,71 @@ related_articles:
     category_class: fonctionnalite
     category_label: "coming soon"
     display_date: "21/03/2026"
-    description: "De nouveaux articles arrivent bientôt ! Restez connectés pour découvrir les dernières actus de Perspikative en suivant Perspikative sur WhatsApp."
+    description: "De nouveaux articles arrivent bientôt ! Restez connectés pour découvrir les dernières actus en suivant Perspikative sur WhatsApp."
 ---
 
 <p>
-  Depuis le lancement officiel du site de Perspikative en février, des améliorations ont été apportées sur la page Rechercher. Découvrons les ensemble…
+  Cette année, l'anniversaire de Perspikative n'était pas comme les autres. Oui, pour les 1 an j'avais marqué le coup. Mais là, c'était unique. J'ai préparé mes meilleures surprises rien que pour vous tout au long de la semaine, et j'ai dévoilé mon plus gros projet !
+</p>
+
+<p>
+  Entre surprises et nouveautés visuelles, cet anniversaire a pris une ampleur inédite. Découvrons ensemble ce qui a rendu ce deuxième anniversaire si spécial...
 </p>
 
 <p class="article-lead">
-  1. Ajout d'un raccourci d'historique de recherche 🕒
+  🧠 Jour 1 : Quiz de culture générale sur Perspikative
 </p>
 <p>
-  Vos 5 dernières recherches sur le site sont désormais directement disponibles depuis un accès rapide sur la page. Cela va permettre à l'utilisateur de pouvoir rechercher des termes plus rapidement, surtout s'il recherche régulièrement les mêmes termes. Vous pouvez à tout moment supprimer votre historique de recherche en appuyant sur le bouton “Effacer l'historique”. À noter : je n'ai aucun accès à tout ce que vous recherchez sur le site.
+  Pour commencer en douceur la célébration de cet anniversaire, j'ai d'abord organisé un quiz exclusif sur la chaîne WhatsApp. Des questions sur l'histoire, des dessins et mes moments marquants de Perspikative qui ont mis à l'épreuve les fans les plus fidèles...
 </p>
 
 <p class="article-lead">
-  2. Recherche dynamique (Bêta) 🔍
+  🌄 Jour 2 : Pack exclusif de 3 fonds d'écran
 </p>
 <p>
-  La recherche est désormais “dynamique”. Il ne s'agit plus simplement d'afficher des résultats, mais de les trier. Les résultats de recherche sont désormais classés par pertinence ! Avant, les résultats étaient affichés dans l'ordre où ils étaient rangés, en fonction du terme recherché. Maintenant, ils sont classés par pertinence, comme un véritable moteur de recherche le fait. Concrètement, lorsque vous rechercherez un terme, les résultats ne s'afficheront plus de manière banale, mais proposerons des résultats qui ont la meilleure probabilité de correspondre à ce que vous cherchez. Ce système de tri par pertinence est en version Bêta, car des incohérences peuvent encore apparaître. Tout de même, la version proposée actuelle est déjà largement suffisante et assez puissante.
+  Trois fonds d'écran inédits ont été créés pour vous, inspirés de l'identité visuelle de l'anniversaire. Parfaits pour personnaliser vos téléphones tout en restant minimaliste ! Vous pouvez toujours les télécharger gratuitement :
 </p>
 
-<p class="article-lead">
-  3. Contenu populaire 🔥
-</p>
-<p>
-  Le contenu populaire est l'une des dernières nouveautés de la page Rechercher. Il permet de mettre en avant certaines pages du site. Les pages mises en avant sont présentes pour inciter l'utilisateur à les visiter. Elles peuvent être mises en avant pour diverses raisons :
-</p>
-<ul>
-  <li>Page populaire : La page proposée est visitée par beaucoup d'utilisateur ;</li>
-  <li>Nouvelle page : La page est récente et a peu de vues ;</li>
-  <li>Collaboration : La page créée est issue d'une collaboration (généralement des dessins). Ce cas arrive environ 2 fois par an.</li>
-</ul>
-
-<p class="article-lead">
-  4. Tolérance aux fautes de syntaxe (Bêta) 📝
-</p>
-<p>
-  Là où le moteur de recherche été auparavant très strict et n'affichait les résultats que si les caractères entrés étaient strictement les mêmes, il est maintenant beaucoup plus tolérant aux fautes, et propose une meilleure flexibilité. Les fautes d'accent sont désormais ignorées, et des résultats peuvent s'afficher même si votre recherche comporte 1 ou 2 caractères incorrects (règle variable et en constante évolution).
-</p>
-<p>
-  Ces nouveautés sont déjà disponibles sur la page Rechercher, et d'autres améliorations sont à venir dans les prochaines semaines. Restez connectés pour découvrir les dernières nouveautés de Perspikative !
-</p>
-
-{% if page.cta %}
-<a href="{{ page.cta.url | escape }}" class="btn-glass">{{ page.cta.label | escape }}</a>
+<a href="/pics/actus/downloads/perspikative-wallpapers-2years.zip" class="btn-glass">Télécharger le pack</a>
 <br><br>
-{% endif %}
 
+<p class="article-lead">
+  🐾 Jour 3 : Dévoilement de la mascotte de Perspikative
+</p>
 <p>
-  À noter : malgré tout le soin apporté et les essais avant la publication de ces nouveautés, certaines améliorations apportées sont encore instables (Bêta). De futures mises à jour sont déjà prévues afin de fixer des bugs encore présents, et d'autres améliorations sont déjà en projet…
+  Après des mois d'essais et de nombreux ratés, la mascotte officielle de Perspikative a été révélée ! Son charadesign unique a été recherché et travaillé pour incarner l'esprit de Perspikative : un mélange de sérieux et decréativité. Elle est désormais cachée un peu partout sur le site web pour vous accompagner.
+</p>
+<p>
+  Je remercie encore mille fois <a href="https://www.instagram.com/supernovaaa_art_/" target="_blank">@supernovaaa_art_</a> pour son aide sur la mascotte ! Grâce à ses conseils précieux et son oeil d'artiste, elle a su m'accompagner dans ce projet ambitieux, qui n'aurait probablement jamais vu le jour sans elle. N'hésitez pas à faire un tour sur <a href="https://www.instagram.com/supernovaaa_art_/" target="_blank">son Instagram</a> pour découvrir ce qu'elle fait !
+</p>
+
+<p class="article-lead">
+  🎨 Jour 4 : Votes du concours ART Challenge - 3ème édition
+</p>
+<p>
+  Le concours ART Challenge (3ème édition) a été lancé pour célébrer cet anniversaire, sans thème imposé particulier. Les participants ont laissé libre cours à leur imagination pour tenter de gagner. Les votes ont été ouverts à la communauté pour choisir les gagnants parmi des créations impressionnates. C'était parfois dûr de choisir ! Vous pouvez retrouver les dessins des gagnants en bas de la page <a href="https://perspikative.com/art-challenge">ART Challenge</a>.
+</p>
+
+<p class="article-lead">
+  🖌️ Jour 5 : Post d'une illustration spéciale anniversaire
+</p>
+<p>
+  "the 2 Year Building". C'est d'ailleurs la toute première illustration réalisée par Perspikative. Ce dessin digital a été imaginé spécialement pour fêter les 2 ans de Perspikative. Elle représente une tour immense, avec un tas de pièces condensées. Ce building festif avec une statue de la mascotte, un toboggan géant, des serres tropicales, le tout entouré d'easter-eggs, est très symbolique. Malgré la pression de le finir à temps, j'ai réussi à transmettre un univers créatif complet. Je suis très fier de ce dessin, et je le trouve particulièrement beau.
+</p>
+
+<p class="article-lead">
+  👀 Jour 6 : Un teaser qui annonce du gros...
+</p>
+<p>
+  Un teaser assez vague a été publié sur les réseaux de Perspikative ce jour-là, laissant penser à une annonce majeure. L'excitation se faisait sentir, et moi-même je ne pouvais plus attendre je reconnais. Mon projet le plus ambitieux jusqu'à ce jour allait être dévoilé et ouvert au public. Seule la Perspikateam était au courant...
+</p>
+
+<p class="article-lead">
+  🥳 Jour 7 : La plus grosse annonce de Perspikative
+</p>
+<p>
+  Après deux ans de création, d'expérimentations et de bons moments, le moment est enfin arrivé. Perspikative, le 17 février 2026, annonce son plus gros projet jusqu'à présent. Perspikative lance son propre site web !!!
+</p>
+<p>
+  Retrouvez tout l'univers de Perspikative en un seul endroit : créations, illustrations, projets, actus, concours, et bien plus encore.
 </p>
