@@ -174,7 +174,7 @@
   font-weight: 700;
   line-height: 1.6rem;
   color: #ffffff;
-  letter-spacing: 0.03rem;
+  letter-spacing: 0.02rem;
   text-transform: uppercase;
   margin-top: 1rem;
 }
@@ -198,8 +198,9 @@
     font-size: 2.2rem;
     line-height: 2rem;
     margin: 0.6rem;
-    margin-top: 1.3rem;
-    letter-spacing: 0.03rem;
+    margin-top: 1.6rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02rem;
   }
 
   .article-hero {
