@@ -8,20 +8,27 @@ permalink: /profile
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mon profil - Perspikative</title>
-
-  <meta name="robots" content="noindex, follow">
+  
+  <meta name="robots" content="index, follow">
 
   <meta name="theme-color" content="#58b3a2" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#344f4a" media="(prefers-color-scheme: dark)">
 
   <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: light)">
-
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <script>
+    const hasFirebaseSession = Object.keys(localStorage).some(key => key.startsWith('firebase:authUser:'));
+    
+    if (!hasFirebaseSession) {
+      window.location.replace("/login");
+    }
+  </script>
 
   <link rel="stylesheet" href="/style.css" />
-  
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
 
   <script defer src="/js/nav-liquid-glass.js"></script>
