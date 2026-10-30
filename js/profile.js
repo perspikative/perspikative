@@ -618,10 +618,12 @@ async function loadLikedDrawings(uid) {
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
+        localStorage.removeItem('isLoggedIn'); // 👈 LIGNE À AJOUTER
         window.location.href = "/login";
         return;
     }
 
+    localStorage.setItem('isLoggedIn', 'true'); // 👈 LIGNE À AJOUTER
     currentUser = user;
 
     // Tout ce qui vient de Firebase Auth est déjà disponible localement
