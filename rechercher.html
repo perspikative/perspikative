@@ -73,8 +73,8 @@ permalink: /rechercher
     }
 
     .search-history-clear {
+      margin: 0 0 0 0.4rem;
       margin-top: 0.65rem;
-      margin-left: 0.4rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -197,6 +197,45 @@ permalink: /rechercher
       transform: translateY(-50%) scale(0.85);
     }
 
+    .keyword-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0 0 0 0.4rem;
+    }
+
+    .keyword-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+      font: inherit;
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0.34rem 0.68rem;
+      border-radius: 50px;
+      transition: all 0.2s ease;
+      box-shadow:
+        inset 0 0 8px rgba(255, 255, 255, 0.25),
+        0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .keyword-chip:hover,
+    .keyword-chip:focus-visible {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+      outline: none;
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3),
+        0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .keyword-chip:active {
+      transform: translateY(0);
+    }
+
     .search-page-container {
       opacity: 0;
       transform: translateY(8px);
@@ -311,6 +350,11 @@ permalink: /rechercher
           <div class="section-title">Recherches récentes</div>
           <div id="searchHistoryList" class="search-history-list"></div>
           <button type="button" id="clearSearchHistory" class="search-history-clear">Effacer l'historique</button>
+        </div>
+
+        <div id="keywordsContent" class="popular-content">
+          <div class="section-title">Mots-clés</div>
+          <div id="keywordsList" class="keyword-list"></div>
         </div>
 
         <div id="popularContent" class="popular-content">
@@ -587,6 +631,7 @@ permalink: /rechercher
     const historyList = document.getElementById('searchHistoryList');
     const clearHistoryBtn = document.getElementById('clearSearchHistory');
     const popularList = document.getElementById('popularList');
+    const keywordsList = document.getElementById('keywordsList');
     const clearSearchInputBtn = document.getElementById('clearSearchInput');
     const searchBubble = document.querySelector('.search-bubble');
 
@@ -612,6 +657,34 @@ permalink: /rechercher
         a.innerHTML = `<img src="${item.icon}" alt=""><span>${item.title}</span>`;
         popularList.appendChild(a);
       });
+    }
+
+    // --- MOTS-CLÉS À METTRE EN AVANT ---
+    const keywordSuggestions = ["Dessin", "Concours", "Actus", "Projets"];
+
+    function renderKeywords() {
+      if (!keywordsList) return;
+      keywordsList.innerHTML = '';
+      keywordSuggestions.forEach(term => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'keyword-chip';
+        btn.dataset.term = term;
+        btn.textContent = term;
+        keywordsList.appendChild(btn);
+      });
+    }
+
+    // Lance une recherche à partir d'un terme choisi (historique ou mot-clé)
+    function applySearchTerm(term) {
+      searchInput.value = term;
+      searchBubble.classList.toggle('has-clear', searchInput.value !== '');
+      updateInputOverflow();
+      requestAnimationFrame(updateInputOverflow);
+      defaultViews.hidden = true; // On cache les vues par défaut
+      runSearch(term.toLowerCase(), term);
+      addToSearchHistory(term);
+      searchInput.focus();
     }
 
     function loadSearchHistory() {
@@ -862,15 +935,13 @@ permalink: /rechercher
     historyList.addEventListener('click', function(e) {
       const item = e.target.closest('.history-item');
       if (!item) return;
-      const term = item.dataset.term || '';
-      searchInput.value = term;
-      searchBubble.classList.toggle('has-clear', searchInput.value !== '');
-      updateInputOverflow();
-      requestAnimationFrame(updateInputOverflow);
-      defaultViews.hidden = true; // On cache les vues par défaut
-      runSearch(term.toLowerCase(), term);
-      addToSearchHistory(term);
-      searchInput.focus();
+      applySearchTerm(item.dataset.term || '');
+    });
+
+    keywordsList.addEventListener('click', function(e) {
+      const item = e.target.closest('.keyword-chip');
+      if (!item) return;
+      applySearchTerm(item.dataset.term || '');
     });
 
     clearHistoryBtn.addEventListener('click', function() {
@@ -880,6 +951,7 @@ permalink: /rechercher
 
     // Initialisation
     renderPopularContent();
+    renderKeywords();
     renderSearchHistory();
     requestAnimationFrame(function() {
       document.querySelector('.search-page-container').classList.add('is-visible');
