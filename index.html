@@ -175,6 +175,12 @@ permalink: /
           PARTICIPE AU ART CHALLENGE
         </a>
       </div>
+
+      <div id="notif-banner" style="cursor: pointer; margin-top: 1rem;">
+        <button id="enable-notifs-btn" class="cta-btn">
+          ACTIVER LES NOTIFICATIONS
+        </button>
+      </div>
     </div>
   </section>
   
@@ -260,6 +266,22 @@ permalink: /
 </script>
   
   <script type="module" src="/js/firebase.js"></script>
+
+  <script type="module">
+    import { initNotifications } from "/js/notifications.js";
+
+    document.addEventListener("prspk:auth-ready", (e) => {
+      const user = e.detail.user;
+      const banner = document.getElementById("notif-banner");
+      const btn = document.getElementById("enable-notifs-btn");
+
+      if (user && banner && btn) {
+        banner.style.display = "block";
+        btn.addEventListener("click", () => initNotifications(user.uid));
+      }
+    });
+  </script>
+
   <script src="/script.js"></script>
 
 </body>
