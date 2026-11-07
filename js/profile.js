@@ -618,12 +618,18 @@ async function loadLikedDrawings(uid) {
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
-        localStorage.removeItem('isLoggedIn'); // 👈 LIGNE À AJOUTER
+        // Retire le flag utilisé par le script instantané du <head> de
+        // profile.html : la prochaine visite sans session saura
+        // immédiatement rediriger vers /login sans attendre Firebase.
+        localStorage.removeItem('isLoggedIn');
         window.location.href = "/login";
         return;
     }
 
-    localStorage.setItem('isLoggedIn', 'true'); // 👈 LIGNE À AJOUTER
+    // Pose le flag lu de façon synchrone par le script du <head> de
+    // profile.html, pour permettre une redirection instantanée vers
+    // /login lors d'une prochaine visite si l'utilisateur se déconnecte.
+    localStorage.setItem('isLoggedIn', 'true');
     currentUser = user;
 
     // Tout ce qui vient de Firebase Auth est déjà disponible localement
