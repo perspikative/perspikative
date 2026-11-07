@@ -1,4 +1,7 @@
-const CACHE_NAME = 'perspikative-v1.4.3';
+// 👇 À incrémenter à CHAQUE déploiement qui touche une page ou un fichier
+// JS important (auth, redirections...). C'est ce qui force les clients à
+// récupérer la nouvelle version du Service Worker et à vider l'ancien cache.
+const CACHE_NAME = 'perspikative-v1.5.0';
 
 // Fichiers essentiels
 const PRECACHE_ASSETS = [
@@ -69,7 +72,11 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME).then(async (cache) => {
       await Promise.allSettled(
         PRECACHE_ASSETS.map((asset) => {
-          return cache.add(asset).catch(() => {});
+          // { cache: 'reload' } : force le navigateur à aller chercher
+          // l'asset sur le réseau pour le pré-cache, plutôt que de
+          // piocher dans son propre cache HTTP une copie potentiellement
+          // périmée au moment de l'installation du nouveau SW.
+          return cache.add(new Request(asset, { cache: 'reload' })).catch(() => {});
         })
       );
     })
@@ -119,9 +126,17 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (req.mode === 'navigate') {
+  // Pages HTML (navigation) ET scripts JS : network-first STRICT, avec
+  // bypass explicite du cache HTTP du navigateur via { cache: 'no-store' }.
+  // Sans ça, un simple fetch(req) peut très bien être satisfait depuis le
+  // cache disque du navigateur sans repasser par le réseau, et on se
+  // retrouve à servir une page ou un profile.js périmés malgré une
+  // stratégie "network-first" censée toujours aller chercher du frais.
+  // C'est précisément ce genre de fichiers (auth, redirections) qui ne
+  // doit jamais rester bloqué sur une ancienne version après déploiement.
+  if (req.mode === 'navigate' || req.destination === 'script') {
     event.respondWith(
-      fetch(req)
+      fetch(req, { cache: 'no-store' })
         .then((res) => {
           const clone = res.clone();
 
@@ -132,13 +147,19 @@ self.addEventListener('fetch', (event) => {
           return res;
         })
         .catch(async () => {
-          return (await caches.match(req)) || caches.match('/offline.html');
+          return (
+            (await caches.match(req)) ||
+            (req.mode === 'navigate' ? caches.match('/offline.html') : undefined)
+          );
         })
     );
 
     return;
   }
 
+  // Tout le reste (images, polices, CSS...) : stale-while-revalidate.
+  // La fraîcheur immédiate n'est pas critique pour ces fichiers-là, donc
+  // on garde l'ancien comportement (cache d'abord, mise à jour en fond).
   event.respondWith(
     caches.match(req).then((cached) => {
       const fetchPromise = fetch(req)
