@@ -21,9 +21,18 @@ permalink: /profile
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   
   <script>
-    const hasFirebaseSession = Object.keys(localStorage).some(key => key.startsWith('firebase:authUser:'));
-    
-    if (!hasFirebaseSession) {
+    // Redirection instantanée si on sait déjà (grâce au flag posé par
+    // profile.js lors du dernier onAuthStateChanged) qu'on n'est pas
+    // connecté. Note : on ne peut PAS détecter la session Firebase en
+    // cherchant une clé "firebase:authUser:" dans localStorage — depuis
+    // le SDK v9+ (modulaire), la persistance LOCAL de Firebase Auth passe
+    // par IndexedDB, pas par localStorage, donc cette clé n'existe quasi
+    // jamais et le check était systématiquement faux (= redirection même
+    // connecté). Le flag isLoggedIn est le seul signal fiable disponible
+    // de façon synchrone ; l'absence de flag (première visite, cache vidé)
+    // ne déclenche pas de redirection ici, mais reste couverte par le
+    // onAuthStateChanged normal dans profile.js un peu plus bas.
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
       window.location.replace("/login");
     }
   </script>
