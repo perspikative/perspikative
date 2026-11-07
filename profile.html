@@ -21,18 +21,26 @@ permalink: /profile
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   
   <script>
-    // Redirection instantanée si on sait déjà (grâce au flag posé par
-    // profile.js lors du dernier onAuthStateChanged) qu'on n'est pas
-    // connecté. Note : on ne peut PAS détecter la session Firebase en
+    // Redirection instantanée UNIQUEMENT si on SAIT déjà, de façon
+    // certaine (flag posé explicitement à 'false' par profile.js lors
+    // d'un précédent onAuthStateChanged qui a constaté la déconnexion),
+    // que l'utilisateur n'est pas connecté.
+    //
+    // Important : on ne redirige PAS quand le flag est simplement absent
+    // (localStorage.getItem renvoie alors null, pas 'false'). Un flag
+    // absent, c'est un état "inconnu", pas "déconnecté" — ça arrive à la
+    // toute première visite, après un cache vidé, ou en navigation
+    // privée. Traiter "absent" comme "déconnecté" créait une boucle sans
+    // issue : tant que profile.js n'a jamais pu s'exécuter jusqu'au bout
+    // (parce qu'on redirigeait avant), il ne pouvait jamais poser le flag
+    // à 'true', donc la prochaine visite redirigeait de nouveau, etc.
+    //
+    // Note : on ne peut pas non plus détecter la session Firebase en
     // cherchant une clé "firebase:authUser:" dans localStorage — depuis
     // le SDK v9+ (modulaire), la persistance LOCAL de Firebase Auth passe
     // par IndexedDB, pas par localStorage, donc cette clé n'existe quasi
-    // jamais et le check était systématiquement faux (= redirection même
-    // connecté). Le flag isLoggedIn est le seul signal fiable disponible
-    // de façon synchrone ; l'absence de flag (première visite, cache vidé)
-    // ne déclenche pas de redirection ici, mais reste couverte par le
-    // onAuthStateChanged normal dans profile.js un peu plus bas.
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
+    // jamais et un tel check serait systématiquement faux.
+    if (localStorage.getItem('isLoggedIn') === 'false') {
       window.location.replace("/login");
     }
   </script>
