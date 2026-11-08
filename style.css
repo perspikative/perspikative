@@ -2571,7 +2571,7 @@ ul {
   margin-top: 2rem;
   text-decoration: none;
   background: rgba(255,255,255,0.1);
-  padding: 1px 1px;
+  padding: 2px 2px;
   border-radius: 50%;
   border: none;
   transition: background-color 0.3s;
@@ -2588,8 +2588,8 @@ ul {
 }
 
 .mentions-content .back-home img {
-  width: 44px; 
-  height: 44px;
+  width: 42px; 
+  height: 42px;
   display: block;
 }
 
