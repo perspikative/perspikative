@@ -1,9 +1,5 @@
-// 👇 À incrémenter à CHAQUE déploiement qui touche une page ou un fichier
-// JS important (auth, redirections...). C'est ce qui force les clients à
-// récupérer la nouvelle version du Service Worker et à vider l'ancien cache.
-const CACHE_NAME = 'perspikative-v1.5.0';
+const CACHE_NAME = 'perspikative-v1.6.0';
 
-// Fichiers essentiels
 const PRECACHE_ASSETS = [
   '/',
    '/@',
