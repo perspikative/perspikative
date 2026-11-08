@@ -2574,7 +2574,7 @@ ul {
   padding: 2px 2px;
   border-radius: 50%;
   border: none;
-  transition: background-color 0.3s;
+  transition: background-color 0.25s;
   box-shadow: 
     inset 0 0 10px rgba(255, 255, 255, 0.18),
     0 4px 10px rgba(0,0,0,0.1);
@@ -2595,25 +2595,14 @@ ul {
 
 @media (max-width: 900px) {
   .mentions-content .back-home {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     margin-top: 2rem;
-    text-decoration: none;
-    background: rgba(255,255,255,0.12);
-    padding: 9px 9px;
-    box-shadow:
-      inset 0 0 10px rgba(255, 255, 255, 0.2),
-      0 4px 10px rgba(0,0,0,0.1);
-    border-radius: 50%;
-    border: 1px solid rgba(255 255 255 / 0.2);
-    transition: background-color 0.3s;
+    padding: 4px 4px;
   }
 
     .mentions-content .back-home img {
-    width: 28px;   /* taille de ton icône */
-    height: 28px;
-    display: block;  /* évite les micro-espaces sous l’image */
+    width: 40px; 
+    height: 40px;
+    display: block; 
   }
 }
 
