@@ -618,22 +618,21 @@ async function loadLikedDrawings(uid) {
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
-        // Pose le flag à 'false' (et non removeItem) : le script
-        // instantané du <head> de profile.html distingue "déconnecté"
-        // (flag === 'false', redirection immédiate à la prochaine visite)
-        // de "inconnu" (flag absent, ne redirige pas tout seul et laisse
-        // onAuthStateChanged trancher) — removeItem rendait les deux cas
-        // indiscernables et créait une boucle de redirection.
-        localStorage.setItem('isLoggedIn', 'false');
+        // Firebase a définitivement répondu "pas connecté" : seul ce
+        // moment-là déclenche une redirection. Plus de flag localStorage,
+        // plus de redirection "au doigt mouillé" sur une valeur pouvant
+        // être obsolète (ex: token expiré côté serveur mais flag encore
+        // à 'true' dans le navigateur).
         window.location.href = "/login";
         return;
     }
 
-    // Pose le flag lu de façon synchrone par le script du <head> de
-    // profile.html, pour permettre une redirection instantanée vers
-    // /login lors d'une prochaine visite si l'utilisateur se déconnecte.
-    localStorage.setItem('isLoggedIn', 'true');
     currentUser = user;
+
+    // Firebase a répondu "connecté" : on peut révéler le contenu de la
+    // page, jusque là masqué côté HTML par le skeleton / l'état
+    // "auth-pending" (voir profile.html).
+    document.documentElement.classList.remove("auth-pending");
 
     // Tout ce qui vient de Firebase Auth est déjà disponible localement
     // (pas de round-trip réseau) : on l'affiche immédiatement, avant même
