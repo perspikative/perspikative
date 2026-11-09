@@ -21,28 +21,13 @@ permalink: /profile
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   
   <script>
-    // Redirection instantanée UNIQUEMENT si on SAIT déjà, de façon
-    // certaine (flag posé explicitement à 'false' par profile.js lors
-    // d'un précédent onAuthStateChanged qui a constaté la déconnexion),
-    // que l'utilisateur n'est pas connecté.
-    //
-    // Important : on ne redirige PAS quand le flag est simplement absent
-    // (localStorage.getItem renvoie alors null, pas 'false'). Un flag
-    // absent, c'est un état "inconnu", pas "déconnecté" — ça arrive à la
-    // toute première visite, après un cache vidé, ou en navigation
-    // privée. Traiter "absent" comme "déconnecté" créait une boucle sans
-    // issue : tant que profile.js n'a jamais pu s'exécuter jusqu'au bout
-    // (parce qu'on redirigeait avant), il ne pouvait jamais poser le flag
-    // à 'true', donc la prochaine visite redirigeait de nouveau, etc.
-    //
-    // Note : on ne peut pas non plus détecter la session Firebase en
-    // cherchant une clé "firebase:authUser:" dans localStorage — depuis
-    // le SDK v9+ (modulaire), la persistance LOCAL de Firebase Auth passe
-    // par IndexedDB, pas par localStorage, donc cette clé n'existe quasi
-    // jamais et un tel check serait systématiquement faux.
-    if (localStorage.getItem('isLoggedIn') === 'false') {
-      window.location.replace("/login");
-    }
+    // Posé AVANT tout rendu : masque le <body> tant que Firebase n'a pas
+    // donné sa réponse définitive (voir .auth-pending plus bas dans le
+    // <style>, et profile.js qui retire cette classe dans
+    // onAuthStateChanged une fois connecté). On ne devine plus rien à
+    // partir d'un flag localStorage : pas connu => on attend, pas de
+    // redirection "au doigt mouillé".
+    document.documentElement.classList.add("auth-pending");
   </script>
 
   <link rel="stylesheet" href="/style.css" />
@@ -55,9 +40,18 @@ permalink: /profile
   * {
     box-sizing: border-box;
   }
-  
+
   :root {
     color-scheme: light dark;
+  }
+
+  /* Masque tout le contenu tant que Firebase n'a pas répondu
+     définitivement (voir le <script> juste avant ce <style>, et
+     profile.js qui retire cette classe dans onAuthStateChanged). Évite
+     à la fois le flash de contenu protégé et le flash de redirection
+     fantôme sur quelqu'un en fait connecté. */
+  html.auth-pending body {
+    visibility: hidden;
   }
 
 @media (prefers-color-scheme: light) {
