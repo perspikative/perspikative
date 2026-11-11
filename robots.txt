@@ -1,2 +1,76 @@
+# Google (Gemini / Vertex AI)
+User-agent: Google-Extended
+Disallow: /
+
+# OpenAI (ChatGPT / DALL-E / Sora)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Meta (Llama / Meta AI)
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+# Apple (Apple Intelligence)
+User-agent: Applebot-Extended
+Disallow: /
+
+# ByteDance (Doubao / TikTok AI)
+User-agent: Bytespider
+Disallow: /
+
+# Common Crawl (Jeux de données ouverts utilisés par de nombreuses IA)
+User-agent: CCBot
+Disallow: /
+
+# Cohere
+User-agent: cohere-ai
+Disallow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Disallow: /
+
+# Amazon
+User-agent: Amazonbot
+Disallow: /
+
+# Diffbot
+User-agent: Diffbot
+Disallow: /
+
+
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Règle générale pour tous les autres robots standards
 User-agent: *
 Allow: /
