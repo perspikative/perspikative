@@ -46,6 +46,5 @@ related_articles:
     description: "Recherche dynamique, nouvelles fonctionnalités et bien plus ! Découvrez les dernières fonctionnalités"
 ---
 
-<p class="article-lead">
-  Ça arrive bientôt!
-</p>
+<p class="article-lead">On redémarre tranquillement</p>
+<p>Prochain article publié le 16 novembre</p>
