@@ -176,14 +176,14 @@
   color: #ffffff;
   letter-spacing: 0.02rem;
   text-transform: uppercase;
-  margin-top: 1rem;
+  margin-top: 3rem;
 }
 
 .related-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 35px;
-  margin: 10px;
+  margin: 10px 150px;
 }
 
 
@@ -328,12 +328,12 @@
 
 .share-button:hover {
   background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-1px);
+  transform: translateX(-1px);
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1), inset 0 0 8px rgba(255, 255, 255, 0.18);
 }
 
 .share-button:active {
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 @media (max-width: 768px) {
