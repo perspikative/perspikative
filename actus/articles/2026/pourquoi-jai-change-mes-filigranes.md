@@ -44,14 +44,6 @@ related_articles:
     category_label: "évènement"
     display_date: "17/02/2026"
     description: "Perspikative fête ses 2 ans ! Découvrez la programmation exclusive de la semaine : quiz, concours, dessin spécial et d'autres surprises..."
-  - title: "Coming soon"
-    url: "https://www.whatsapp.com/channel/0029VaKP3Kd5Ui2gky1r5m3y"
-    cover: /pics/actus/2026/coming-soon.webp
-    cover_alt: "Coming soon"
-    category_class: fonctionnalite
-    category_label: "coming soon"
-    display_date: "21/03/2026"
-    description: "De nouveaux articles arrivent bientôt ! Restez connectés pour découvrir les dernières actus en suivant Perspikative sur WhatsApp."
 ---
 
 <p class="article-lead">

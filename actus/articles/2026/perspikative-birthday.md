@@ -33,6 +33,14 @@ authors:
   - "Dsj5CIxUn8bqhhgdACxBcaB4HFB2"
 
 related_articles:
+  - title: "La Trilogie des Nouveautés"
+    url: /actus/2026/la-trilogie-des-nouveautes
+    cover: /pics/actus/2026/la-trilogie-des-nouveautes.webp
+    cover_alt: "La Trilogie des Nouveautés"
+    category_class: évènement
+    category_label: "évènement"
+    display_date: "16/11/2026"
+    description: "La fin de l'été 2026 a offert une avalanche de nouveautés pour le site en 3 chapitres."
   - title: "Nouveautés de la recherche"
     url: /actus/2026/nouveautes-de-la-recherche
     cover: /pics/actus/2026/nouveautes-de-la-recherche.webp
@@ -41,22 +49,6 @@ related_articles:
     category_label: "fonctionnalité"
     display_date: "01/04/2026"
     description: "Recherche dynamique, nouvelles fonctionnalités et bien plus ! Découvrez les dernières fonctionnalités"
-  - title: "Perspikative Birthday"
-    url: /actus/2026/perspikative-birthday
-    cover: /pics/actus/2026/perspikative-birthday.webp
-    cover_alt: "Affiche anniversaire Perspikative"
-    category_class: fonctionnalite
-    category_label: "évènement"
-    display_date: "17/02/2026"
-    description: "Perspikative fête ses 2 ans ! Découvrez la programmation exclusive de la semaine : quiz, concours, dessin spécial et d'autres surprises..."
-  - title: "Coming soon"
-    url: "https://www.whatsapp.com/channel/0029VaKP3Kd5Ui2gky1r5m3y"
-    cover: /pics/actus/2026/coming-soon.webp
-    cover_alt: "Coming soon"
-    category_class: fonctionnalite
-    category_label: "coming soon"
-    display_date: "21/03/2026"
-    description: "De nouveaux articles arrivent bientôt ! Restez connectés pour découvrir les dernières actus en suivant Perspikative sur WhatsApp."
 ---
 
 <p>
