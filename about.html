@@ -74,10 +74,10 @@ permalink: /about
       width: 100%;
       max-width: none;
       margin: 0;
-      padding: var(--ap-gap) 0;
+      padding: 60px 0px 80px 0px;
       background: transparent;
       color: var(--ap-text);
-      font-family: "Rubik", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      font-family: "Rubik", -apple-system, system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       box-shadow: none;
       border: 0;
@@ -188,6 +188,11 @@ permalink: /about
         align-items: center;
         gap: clamp(48px, 7vw, 112px);
       }
+
+      .ap-main {
+      padding: 100px 0px 100px 0px;
+    }
+
       /* 1ère, 3ème, 5ème… section : image à gauche, texte à droite */
       .ap-section:nth-of-type(odd) .ap-media { order: 1; }
       .ap-section:nth-of-type(odd) .ap-content { order: 2; }
