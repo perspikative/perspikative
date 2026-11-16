@@ -20,7 +20,7 @@ keywords:
 
 og_description: "📰 Découvre cet article sur Perspikative !"
 og_image: "https://perspikative.com/pics/meta/actus/2026/pourquoi-jai-change-mes-filigranes.jpg"
-cover: /pics/actus/2026/pourquoi-jai-change-mes-filigranes.webp
+cover: /pics/actus/articles/2026/cover/pourquoi-jai-change-mes-filigranes.webp
 cover_alt: "Image de couverture"
 
 share_text: "Découvre cet article sur Perspikative !"
@@ -30,7 +30,7 @@ authors:
 related_articles:
   - title: "Nouveautés de la recherche"
     url: /actus/2026/nouveautes-de-la-recherche
-    cover: /pics/actus/2026/nouveautes-de-la-recherche.webp
+    cover: /pics/actus/articles/2026/cover/nouveautes-de-la-recherche.webp
     cover_alt: "Nouveautés de la recherche"
     category_class: fonctionnalite
     category_label: "fonctionnalité"
@@ -38,7 +38,7 @@ related_articles:
     description: "Recherche dynamique, nouvelles fonctionnalités et bien plus ! Découvrez les dernières fonctionnalités"
   - title: "Perspikative Birthday"
     url: /actus/2026/perspikative-birthday
-    cover: /pics/actus/2026/perspikative-birthday.webp
+    cover: /pics/actus/articles/2026/cover/perspikative-birthday.webp
     cover_alt: "Affiche anniversaire Perspikative"
     category_class: fonctionnalite
     category_label: "évènement"
@@ -70,7 +70,7 @@ related_articles:
   Je réflechissais déjà depuis longtemps à remplacer ces filigranes. Je voulais trouver un autre moyen.
 </p>
 <p>
-  En plus de ma signature dans mes dessins, j'ai donc décidé de mettre un “@perspikative” à la place du filigrane. Mais cette nouveauté devait se faire sous une condition : celle d'avoir une page @perspikative sur Instagram. Et depuis sa création, tous les dessins ont cette signature secondaire. Plus discrète et mieux intégrée à l'image, cette signature permet de reconnaître instantanément mes dessins tout en rappelant l'auteur.
+  En plus de ma signature dans mes dessins, j'ai donc décidé de mettre un “@perspikative” à la place du filigrane. Mais cette nouveauté devait se faire sous une condition : celle d'avoir une page <a href="https://www.instagram.com/perspikative/" target="_blank">@perspikative sur Instagram</a>. Et depuis sa création, tous les dessins ont cette signature secondaire. Plus discrète et mieux intégrée à l'image, cette signature permet de reconnaître instantanément mes dessins tout en rappelant l'auteur.
 </p>
 <p>
   Le but était de se débarrasser de ce gros filigrane tout en gardant une signature, mais de la rendre plus naturelle.

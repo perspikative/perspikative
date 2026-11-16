@@ -25,7 +25,7 @@ keywords:
 
 og_description: "📰 Découvre cet article sur Perspikative !"
 og_image: "https://perspikative.com/pics/meta/actus/2026/perspikative-birthday.jpg"
-cover: /pics/actus/2026/perspikative-birthday.webp
+cover: /pics/actus/articles/2026/cover/perspikative-birthday.webp
 cover_alt: "Image de couverture"
 
 share_text: "Découvre cet article sur Perspikative !"
@@ -35,7 +35,7 @@ authors:
 related_articles:
   - title: "La Trilogie des Nouveautés"
     url: /actus/2026/la-trilogie-des-nouveautes
-    cover: /pics/actus/2026/la-trilogie-des-nouveautes.webp
+    cover: /pics/actus/articles/2026/cover/la-trilogie-des-nouveautes.webp
     cover_alt: "La Trilogie des Nouveautés"
     category_class: évènement
     category_label: "évènement"
@@ -43,7 +43,7 @@ related_articles:
     description: "La fin de l'été 2026 a offert une avalanche de nouveautés pour le site en 3 chapitres."
   - title: "Nouveautés de la recherche"
     url: /actus/2026/nouveautes-de-la-recherche
-    cover: /pics/actus/2026/nouveautes-de-la-recherche.webp
+    cover: /pics/actus/articles/2026/cover/nouveautes-de-la-recherche.webp
     cover_alt: "Nouveautés de la recherche"
     category_class: fonctionnalite
     category_label: "fonctionnalité"
@@ -90,7 +90,7 @@ related_articles:
   🎨 Jour 4 : Votes du concours ART Challenge - 3ème édition
 </p>
 <p>
-  Le concours ART Challenge (3ème édition) a été lancé pour célébrer cet anniversaire, sans thème imposé particulier. Les participants ont laissé libre cours à leur imagination pour tenter de gagner. Les votes ont été ouverts à la communauté pour choisir les gagnants parmi des créations impressionnates. C'était parfois dûr de choisir ! Vous pouvez retrouver les dessins des gagnants en bas de la page <a href="https://perspikative.com/art-challenge">ART Challenge</a>.
+  Le concours ART Challenge (3ème édition) a été lancé pour célébrer cet anniversaire, sans thème imposé particulier. Les participants ont laissé libre cours à leur imagination pour tenter de gagner. Les votes ont été ouverts à la communauté pour choisir les gagnants parmi des créations impressionnates. C'était parfois dûr de choisir ! Vous pouvez retrouver les dessins des gagnants en bas de la page <a href="/art-challenge">ART Challenge</a>.
 </p>
 
 <p class="article-lead">

@@ -20,7 +20,7 @@ keywords:
 
 og_description: "📰 Découvre cet article sur Perspikative !"
 og_image: "https://perspikative.com/pics/meta/actus/2026/nouveautes-recherche.jpg"
-cover: /pics/actus/2026/nouveautes-de-la-recherche.webp
+cover: /pics/actus/articles/2026/cover/nouveautes-de-la-recherche.webp
 cover_alt: "Image de couverture"
 
 share_text: "Découvre cet article sur Perspikative !"
@@ -34,7 +34,7 @@ cta:
 related_articles:
   - title: "Pourquoi j'ai changé mes filigranes"
     url: /actus/2026/pourquoi-jai-change-mes-filigranes
-    cover: /pics/actus/2026/pourquoi-jai-change-mes-filigranes.webp
+    cover: /pics/actus/articles/2026/cover/pourquoi-jai-change-mes-filigranes.webp
     cover_alt: "Pourquoi j'ai changé mes filigranes"
     category_class: blog
     category_label: "blog"
@@ -42,7 +42,7 @@ related_articles:
     description: "Découvrez comment le retrait du filigrane change tout sur mes dessins."
   - title: "Perspikative Birthday"
     url: /actus/2026/perspikative-birthday
-    cover: /pics/actus/2026/perspikative-birthday.webp
+    cover: /pics/actus/articles/2026/cover/perspikative-birthday.webp
     cover_alt: "Affiche anniversaire Perspikative"
     category_class: fonctionnalite
     category_label: "évènement"
@@ -91,6 +91,7 @@ related_articles:
 </p>
 
 {% if page.cta %}
+<br>
 <a href="{{ page.cta.url | escape }}" class="btn-glass">{{ page.cta.label | escape }}</a>
 <br><br>
 {% endif %}
