@@ -3,7 +3,7 @@ layout: article
 permalink: /actus/2026/la-trilogie-des-nouveautes-part-2
 
 title: "La Trilogie des Nouveautés - Part 2"
-date: 2026-11-20
+date: 2026-11-23
 published_date: "Publié le 23 novembre 2026"
 description: "La fin de l'été 2026 a offert une avalanche de nouveautés pour le site, en 3 chapitres. Voici le second."
 keywords:
