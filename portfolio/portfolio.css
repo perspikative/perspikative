@@ -90,7 +90,7 @@
   width: 16px;
   height: 16px;
   background: var(--filter-panel-bg);
-  border-radius: 2px 0 0 0;
+  border-radius: 4px 0 0 0;
   box-shadow: inset 2px 2px 7px 0px rgba(255, 255, 255, 0.16);
   transform: rotate(45deg);
 }
