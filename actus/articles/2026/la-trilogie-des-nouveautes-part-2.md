@@ -117,11 +117,14 @@ related_articles:
   Le système de signalement est une mesure très importante. Elle permet à n'importe quel Perspikativeur de signaler un commentaire qu'iel juge inapproprié. Un signalement est rapide et efficace à effectuer. Il vous suffit de cliquer sur le petit drapeau Signaler dans le coin supérieur droit d'un commentaire, puis sélectionner la catégorie qui correspond le plus au type d'infraction qui a été commis selon vous.
 </p>
 <div class="article-image">
-  <img src="/pics/actus/articles/2026/pics/signalement-de-commentaire.webp" alt="Image d'illustration - section commentaires" loading="lazy">
+  <img src="/pics/actus/articles/2026/pics/signalement-de-commentaire.webp" alt="Image d'illustration - signalement de commentaire" loading="lazy">
 </div>
 <p>
   Je reçois chaque signalement individuellement, anonymement si vous n'êtes pas connecté, et me permet de décider de garder ou supprimer le commentaire en fontion de l'infraction commise. À noter que si plusieurs Perspikativeurs signalent un même commentaire avant même que ne puisse agir, celui-ci sera masqué immédiatement
 </p>
+<div class="article-image">
+  <img src="/pics/actus/articles/2026/pics/commentaire-masque.webp" alt="Image d'illustration - commentaire masqué" loading="lazy">
+</div>
 <br>
 
 <p><strong>5. Naviguer en toute tranquilité</strong></p>
