@@ -114,5 +114,8 @@ related_articles:
   <li>Un système de signalement</li>
 </ul>
 <p>
-  Le système de signalement est une mesure très importante. Elle permet à n'importe quel Perspikativeur de signaler un commentaire qu'iel juge inapproprié
+  Le système de signalement est une mesure très importante. Elle permet à n'importe quel Perspikativeur de signaler un commentaire qu'iel juge inapproprié. Un signalement est rapide et efficace à effectuer. Il vous suffit de cliquer sur le petit drapeau Signaler dans le coin supérieur droit d'un commentaire, puis sélectionner la catégorie qui correspond le plus au type d'infraction qui a été commis selon vous.
 </p>
+<div class="article-image">
+  <img src="/pics/actus/articles/2026/pics/signalement-de-commentaire.webp" alt="Image d'illustration - section commentaires" loading="lazy">
+</div>
