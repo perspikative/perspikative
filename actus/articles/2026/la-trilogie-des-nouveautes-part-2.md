@@ -100,5 +100,19 @@ related_articles:
   <img src="/pics/actus/articles/2026/pics/section-commentaires.webp" alt="Image d'illustration - section commentaires" loading="lazy">
 </div>
 <p>
-  En dessous de chaque œuvre, une section commentaire est présente.
+  En dessous de chaque œuvre, une section commentaire est présente. On peut y retrouver la barre du champ de saisie et les bulles de commentaires, avec les photos de profil et les pseudos des Perspikativeurs. Cette section a été un vrai défi, car elle demande l'ajout de 4 scripts supplémentaires venant se charger sur le site, dont 3 rien que pour elle. On retrouve tout d'abord un script qui gère les commentaires (affichage, commentaire masqué ou supprimé), un script secret (non, vous saurez juste à l'article du Chapitre 3 hehe), puis un script qui gère les fondus des commentaires si il y en a plus de 5 (un script juste pour l'ésthétique finalement). Et enfin, un script qui gère la modération...
+</p>
+
+<p><strong>4. Des limites (quand-même)</strong></p>
+<p>
+  A partir du moment où le champ est libre, les limites s'effondrent. Les <a href="/terms-of-service" target="_blank">conditions d'utilisation</a> du site servent entre autre à cela. Les commentaires sont un espace libre d'échange, avec certaines règles à respecter. Entre autre, la politesse y est primordiale. Perspikative a donc instaurer plusieurs mesures afin de garantir un espace libre et safe, avec entre autre :
+</p>
+<ul>
+  <li>La possession d'un profil Perspikative</li>
+  <li>Un nombre de commentaires limité à 5 par œuvre</li>
+  <li>Une liste de mots bannis (mots grossiers, insultants ou explicites)</li>
+  <li>Un système de signalement</li>
+</ul>
+<p>
+  Le système de signalement est une mesure très importante. Elle permet à n'importe quel Perspikativeur de signaler un commentaire qu'iel juge inapproprié
 </p>
