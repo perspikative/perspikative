@@ -105,7 +105,7 @@ related_articles:
 
 <p><strong>4. Des limites (quand-même)</strong></p>
 <p>
-  A partir du moment où le champ est libre, les limites s'effondrent. Les <a href="/terms-of-service" target="_blank">conditions d'utilisation</a> du site servent entre autre à cela. Les commentaires sont un espace libre d'échange, avec certaines règles à respecter. Entre autre, la politesse y est primordiale. Perspikative a donc instaurer plusieurs mesures afin de garantir un espace libre et safe, avec entre autre :
+  À partir du moment où le champ est libre, les limites s'effondrent. Les <a href="/terms-of-service" target="_blank">conditions d'utilisation</a> du site servent entre autre à cela. Les commentaires sont un espace libre d'échange, avec certaines règles à respecter. Entre autre, la politesse y est primordiale. Perspikative a donc instaurer plusieurs mesures afin de garantir un espace libre et safe, avec entre autre :
 </p>
 <ul>
   <li>La possession d'un profil Perspikative</li>
@@ -119,6 +119,9 @@ related_articles:
 <div class="article-image">
   <img src="/pics/actus/articles/2026/pics/signalement-de-commentaire.webp" alt="Image d'illustration - section commentaires" loading="lazy">
 </div>
+<p>
+  Je reçois chaque signalement individuellement, anonymement si vous n'êtes pas connecté, et me permet de décider de garder ou supprimer le commentaire en fontion de l'infraction commise. À noter que si plusieurs Perspikativeurs signalent un même commentaire avant même que ne puisse agir, celui-ci sera masqué immédiatement
+</p>
 <br>
 
 <p><strong>5. Naviguer en toute tranquilité</strong></p>
