@@ -119,3 +119,9 @@ related_articles:
 <div class="article-image">
   <img src="/pics/actus/articles/2026/pics/signalement-de-commentaire.webp" alt="Image d'illustration - section commentaires" loading="lazy">
 </div>
+<br>
+
+<p><strong>5. Naviguer en toute tranquilité</strong></p>
+<p>
+  Une dernière nouveauté, même si elle reste mineure, est celle de l'ajout de flèche de navigation au sein des lightboxs. C'est très utile si vous souhaitez passer d'une œuvre à une autre sans devoir sortir à chaque fois. Elles rendent l'expérience plus fluide, tout simplement.
+</p>
