@@ -97,7 +97,7 @@ related_articles:
   Que serait Perspikative sans interactions ? Pas grand chose effectivement, même s'il faut encore que je m'améliore. Cette idée d'ajouter une section commentaires dans les lightboxs (fenêtres) de mes œuvres n'est pas d'ajourd'hui, mais je me vois enfin vous la présenter !
 </p>
 <div class="article-image">
-  <img src="/pics/actus/articles/2026/pics/section-commentaires.webp" alt="Image d'illustration -section commentaires" loading="lazy">
+  <img src="/pics/actus/articles/2026/pics/section-commentaires.webp" alt="Image d'illustration - section commentaires" loading="lazy">
 </div>
 <p>
   En dessous de chaque œuvre, une section commentaire est présente.
